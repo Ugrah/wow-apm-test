@@ -1,0 +1,28 @@
+pie {
+    width: 12px;
+    height: 12px;
+    display: block;
+    border-radius: 50%;
+    background-color: grey;
+    border: 2px solid grey;
+    /* float: left;
+    margin: 1em; */
+}
+
+.level-one {
+    background-image: linear-gradient(90deg, transparent 50%, white 50%), linear-gradient(90deg, white 50%, transparent 50%);
+}
+.level-two {
+    background-image: linear-gradient(90deg, white 50%, transparent 50%);
+}
+
+/* Slices greater than 50% require first gradient
+   to be transparent -> green */
+
+.level-three {
+    background-image: linear-gradient(180deg, transparent 50%, grey 50%), linear-gradient(90deg, white 50%, transparent 50%);
+}
+
+.level-four {
+    background-image: none;
+}

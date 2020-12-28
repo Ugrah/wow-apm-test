@@ -1,0 +1,7 @@
+.btn-outline-danger {
+    border-color: transparent;
+}
+
+.sm_select_bool_controller.active {
+    background-color: #28a745;
+}

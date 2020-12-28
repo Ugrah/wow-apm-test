@@ -1,0 +1,221 @@
+@font-face {
+    font-family: 'icomoon';
+    src: url('../fonts/icomoon.eot?v9ywk6');
+    src: url('../fonts/icomoon.eot?v9ywk6#iefix') format('embedded-opentype'), url('fonts/icomoon.ttf?v9ywk6') format('truetype'), url('fonts/icomoon.woff?v9ywk6') format('woff'), url('fonts/icomoon.svg?v9ywk6#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+    font-family: 'icomoon' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-Maersk_Pictograms_LoadedContainerShip_20190627:before {
+    content: "\e900";
+}
+
+.icon-Maersk_Pictograms_EmptyContainerShip_20190627:before {
+    content: "\e901";
+}
+
+.icon-Maersk_Pictograms_IllustrationDetails_20190627:before {
+    content: "\e902";
+}
+
+.icon-Maersk_Pictograms_LoadingContainerShip_20190627:before {
+    content: "\e903";
+}
+
+.icon-Maersk_Pictograms_Train_20190627:before {
+    content: "\e904";
+}
+
+.icon-Maersk_Pictograms_ContainerStacking_20190627:before {
+    content: "\e905";
+}
+
+.icon-Maersk_Pictograms_DrivingTruck_20190627:before {
+    content: "\e906";
+}
+
+.icon-Maersk_Pictograms_EmptyTrainWagon_20190627:before {
+    content: "\e907";
+}
+
+.icon-Maersk_Pictograms_LoadedTrainWagon_20190627:before {
+    content: "\e908";
+}
+
+.icon-Maersk_Pictograms_LoadedTruck_20190627:before {
+    content: "\e909";
+}
+
+.icon-Maersk_Pictograms_LoadingTrainWagon_20190627:before {
+    content: "\e90a";
+}
+
+.icon-Maersk_Pictograms_EmptyContainer_20190627:before {
+    content: "\e90b";
+}
+
+.icon-Maersk_Pictograms_EmptyTruck_20190627:before {
+    content: "\e90c";
+}
+
+.icon-Maersk_Pictograms_LoadAndEmptyContainer_20190627:before {
+    content: "\e90d";
+}
+
+.icon-Maersk_Pictograms_LoadContainer_20190627:before {
+    content: "\e90e";
+}
+
+.icon-Maersk_Pictograms_LoadingTruck_20190627:before {
+    content: "\e90f";
+}
+
+.icon-Maersk_Pictograms_Agriculture_20190627:before {
+    content: "\e910";
+}
+
+.icon-Maersk_Pictograms_DigitalServies_20190627:before {
+    content: "\e911";
+}
+
+.icon-Maersk_Pictograms_Electronics_20190627:before {
+    content: "\e912";
+}
+
+.icon-Maersk_Pictograms_Globe_20190627:before {
+    content: "\e913";
+}
+
+.icon-Maersk_Pictograms_Handshake_20190627:before {
+    content: "\e914";
+}
+
+.icon-Maersk_Pictograms_Headset_20190627:before {
+    content: "\e915";
+}
+
+.icon-Maersk_Pictograms_Package_20190627:before {
+    content: "\e916";
+}
+
+.icon-Maersk_Pictograms_Stopwatch_20190627:before {
+    content: "\e917";
+}
+
+.icon-Maersk_Pictograms_Apparel_20190627:before {
+    content: "\e918";
+}
+
+.icon-Maersk_Pictograms_Chemicals_20190627:before {
+    content: "\e919";
+}
+
+.icon-Maersk_Pictograms_Landscape_20190627:before {
+    content: "\e91a";
+}
+
+.icon-Maersk_Pictograms_Pharma_20190627:before {
+    content: "\e91b";
+}
+
+.icon-Maersk_Pictograms_Produce_20190627:before {
+    content: "\e91c";
+}
+
+.icon-Maersk_Pictograms_Protein_20190627:before {
+    content: "\e91d";
+}
+
+.icon-Maersk_Pictograms_Seafood_20190627:before {
+    content: "\e91e";
+}
+
+.icon-Maersk_Pictograms_Factory_20190627:before {
+    content: "\e91f";
+}
+
+.icon-Maersk_Pictograms_Machinery_20190627:before {
+    content: "\e920";
+}
+
+.icon-Maersk_Pictograms_OversizedCargo_20190627:before {
+    content: "\e921";
+}
+
+.icon-Maersk_Pictograms_Shop_20190627:before {
+    content: "\e922";
+}
+
+.icon-Maersk_Pictograms_Terminal_20190627:before {
+    content: "\e923";
+}
+
+.icon-Maersk_Pictograms_Warehouse_20190627:before {
+    content: "\e924";
+}
+
+.icon-Maersk_Pictograms_Containers_20190627:before {
+    content: "\e925";
+}
+
+.icon-Maersk_Pictograms_DangerousCargo_20190627:before {
+    content: "\e926";
+}
+
+.icon-Maersk_Pictograms_Export_20190627:before {
+    content: "\e927";
+}
+
+.icon-Maersk_Pictograms_Import_20190627:before {
+    content: "\e928";
+}
+
+.icon-Maersk_Pictograms_Readiness_20190627:before {
+    content: "\e929";
+}
+
+.icon-Maersk_Pictograms_Automobile_20190627:before {
+    content: "\e92a";
+}
+
+.icon-Maersk_Pictograms_LightHouse_20190627:before {
+    content: "\e92b";
+}
+
+.icon-Maersk_Pictograms_Mountain_20190627:before {
+    content: "\e92c";
+}
+
+.icon-Maersk_Pictograms_Plane_20190627:before {
+    content: "\e92d";
+}
+
+.icon-Maersk_Pictograms_Sattelite_20190627:before {
+    content: "\e92e";
+}
+
+.icon-Maersk_Pictograms_Tugboat_20190627:before {
+    content: "\e92f";
+}
+
+.icon-Maersk_Pictograms_Buildings_20190627:before {
+    content: "\e930";
+}
+
+.icon-Maersk_Pictograms_EiffelTower_20190627:before {
+    content: "\e931";
+}
