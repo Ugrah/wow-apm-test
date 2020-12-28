@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
 
         'ajax' => \App\Http\Middleware\Ajax::class,
         'auth.user' => \App\Http\Middleware\UserAuth::class,
+        'cors' => \App\Http\Middleware\Cors::class, 
     ];
 }

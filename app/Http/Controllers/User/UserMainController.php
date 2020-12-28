@@ -21,11 +21,11 @@ class UserMainController extends Controller
     public $success_status = 200;
 
 
-    // public function __construct(ApiService $api_service)
-    public function __construct()
+    public function __construct(ApiService $api_service)
+    // public function __construct()
     {
         $this->_config = request('_config');
-        // $this->api_service = $api_service;
+        $this->api_service = $api_service;
         $this->middleware('auth.user')->only(['userType']);
     }
 
@@ -60,10 +60,11 @@ class UserMainController extends Controller
         $body = null;
 
         $data = ['email' => $request->input('login'), 'password' => $request->input('password')];
-        $client = new \GuzzleHttp\Client(['base_uri' => 'https://apm-test.maxmind.ma']);
 
         try {
-            $res = $client->request('POST', '/api/login', ['form_params' => $data]);
+            $client = new \GuzzleHttp\Client(['base_uri' => 'https://apm-test.maxmind.ma/api']);
+            $res = $client->request('POST', '/login', ['form_params' => $data]);
+            // $res = $this->api_service->signin($data);
             $body = json_decode($res->getBody());
         } catch (\Exception $e) {
             // $responseBody = $e->getResponse()->getBody(true);

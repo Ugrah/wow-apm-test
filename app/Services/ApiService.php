@@ -15,7 +15,6 @@ class ApiService
 
     public function __construct()
     {
-
         $this->api_url = URL::to('/api');
         $this->client = new \GuzzleHttp\Client(['base_uri' => env('API_BASE_URL')]);
 

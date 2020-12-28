@@ -16,11 +16,13 @@ use App\Http\Controllers\Api\UserController;
 |
 */
 
-Route::post('login', [UserController::class, 'login'])->name('api.login');
-Route::post('register', [UserController::class, 'register'])->name('api.register');
+Route::group(['middleware' => 'cors'], function () {
+    Route::post('login', [UserController::class, 'login'])->name('api.login');
+    Route::post('register', [UserController::class, 'register'])->name('api.register');
 
-Route::group(['middleware' => 'auth:api'], function () {
-    Route::get('user', [UserController::class, 'user'])->name('api.user');
+    Route::group(['middleware' => 'auth:api'], function () {
+        Route::get('user', [UserController::class, 'user'])->name('api.user');
+    });
 });
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
