@@ -188,8 +188,15 @@
                                 // return;
                                 $('#submit-login').html('Submit');
                                 $("#submit-login").attr("disabled", false);
-                                alert(response.message);
+                                if (response.redirectUrl) window.location.replace(response.redirectUrl);
+                                // alert(response.message);
                                 // document.getElementById("login-form").reset();
+                            },
+                            error: function(xhr, ajaxOptions, thrownError) {
+                                alert(xhr.status);
+                                alert(thrownError);
+                                $('#submit-login').html('Submit');
+                                $("#submit-login").attr("disabled", false);
                             }
                         });
                     }

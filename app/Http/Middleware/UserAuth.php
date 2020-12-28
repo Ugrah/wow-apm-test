@@ -22,7 +22,7 @@ class UserAuth
     {
         $api_service = new ApiService();
 
-        if((!Session::has('token')) || (!$api_service->checkIfUserIsConnected())) {
+        if(!$request->cookie('api_token')) {
             return redirect()->route('login');
         }
 
