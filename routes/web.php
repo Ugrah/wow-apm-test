@@ -17,6 +17,7 @@ use App\Http\Controllers\User\UserMainController;
 */
 
 Route::get('/', [UserMainController::class, 'userType'])->defaults('_config', ['view' => 'welcome'])->name('user.type');
+Route::post('/', [UserMainController::class, 'userType'])->defaults('_config', ['view' => 'welcome'])->name('user.type');
 
 
 

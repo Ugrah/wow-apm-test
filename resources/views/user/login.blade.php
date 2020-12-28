@@ -172,33 +172,70 @@
                         },
                     },
                     submitHandler: function(form) {
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            }
-                        });
-                        $('#submit-login').html('Please Wait...');
-                        $("#submit-login").attr("disabled", true);
-                        $.ajax({
-                            url: "{{ url('login') }}",
-                            type: "POST",
-                            data: $('#login-form').serialize(),
-                            success: function(response) {
-                                console.log(response);
-                                // return;
-                                $('#submit-login').html('Submit');
-                                $("#submit-login").attr("disabled", false);
-                                if (response.redirectUrl) window.location.replace(response.redirectUrl);
-                                // alert(response.message);
-                                // document.getElementById("login-form").reset();
-                            },
-                            error: function(xhr, ajaxOptions, thrownError) {
-                                alert(xhr.status);
-                                alert(thrownError);
-                                $('#submit-login').html('Submit');
-                                $("#submit-login").attr("disabled", false);
-                            }
-                        });
+                        // $.ajaxSetup({
+                        //     headers: {
+                        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        //     }
+                        // });
+                        // $('#submit-login').html('Please Wait...');
+                        // $("#submit-login").attr("disabled", true);
+                        // $.ajax({
+                        //     url: "{{ url('login') }}",
+                        //     type: "POST",
+                        //     data: $('#login-form').serialize(),
+                        //     success: function(response) {
+                        //         console.log(response);
+                        //         // return;
+                        //         $('#submit-login').html('Submit');
+                        //         $("#submit-login").attr("disabled", false);
+                        //         if (response.redirectUrl) window.location.replace(response.redirectUrl);
+                        //         // alert(response.message);
+                        //         // document.getElementById("login-form").reset();
+                        //     },
+                        //     error: function(xhr, ajaxOptions, thrownError) {
+                        //         alert(xhr.status);
+                        //         alert(thrownError);
+                        //         $('#submit-login').html('Submit');
+                        //         $("#submit-login").attr("disabled", false);
+                        //     }
+                        // });
+
+                        var myHeaders = new Headers();
+                        // myHeaders.append("Cookie", "__cfduid=d21ca664d247261671437bc46adc106d01608896722");
+
+                        var formdata = new FormData();
+                        formdata.append("email", "grulog23@gmail.com");
+                        formdata.append("password", "Gfirst04091990.");
+
+                        var requestOptions = {
+                            method: 'POST',
+                            headers: myHeaders,
+                            body: formdata,
+                            redirect: 'follow'
+                        };
+
+                        fetch("https://apm-test.maxmind.ma/api/login", requestOptions)
+                            .then(response => response.text())
+                            .then(result => {
+                                result = JSON.parse(result);
+                                // $.cookie('api_token', result.success.token, { expires: 7 });
+                                if (result.success.token) {
+                                    document.cookie = "api_token=" + result.success.token;
+                                    document.cookie = `api_token=${result.success.token}; path=/; domain=.{{ request()->getHost() }}`;
+
+                                    console.log(result);
+                                    console.log(result.success.token);
+
+                                    let url = "{{ route('user.type') }}";
+                                    let form = $(`<form action="${url}" method="post">
+                                        <input type="hidden" name="_token" value="${$('meta[name="csrf-token"]').attr('content')}" />
+                                        <input type="hidden" name="api_token" value="${result.success.token}" />
+                                    </form>`);
+                                    $('body').append(form);
+                                    form.submit();
+                                }
+                            })
+                            .catch(error => console.log('error', error));
                     }
                 })
             }
