@@ -60,7 +60,7 @@ class UserMainController extends Controller
         $body = null;
 
         $data = ['email' => $request->input('login'), 'password' => $request->input('password')];
-        $client = new \GuzzleHttp\Client(['base_uri' => 'http://localhost:8000']);
+        $client = new \GuzzleHttp\Client(['base_uri' => 'https://apm-test.maxmind.ma']);
 
         try {
             $res = $client->request('POST', '/api/login', ['form_params' => $data]);
