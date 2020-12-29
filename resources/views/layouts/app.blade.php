@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="">
     <meta name="author" content="Maxmind">
+    <meta name="api_token" content="{{ $_COOKIE['api_token']??'' }}">
 
     <title>{{ config('app.name') }}</title>
 
@@ -46,76 +47,12 @@
     </div>
     <!-- Page laoder ends -->
 
-    @if( Auth::user() )
-        User connexted
-    @else
-        User not connexted
-    @endif
+
 
     <!-- Begin page content -->
     <main class="flex-shrink-0 main-container">
         <!-- page content goes here -->
-        <div class="banner-hero vh-100 scroll-y bg-dark">
-            <div class="background opac">
-                <img src="{{ asset('img/login_.jpg') }}" alt="">
-            </div>
-            <div class="container h-100 text-white">
-                <form id="login-form" action="" method="">
-                    @csrf
-                    <div class="row h-100 h-sm-auto">
-                        <div class="col-12 col-md-8 col-lg-5 col-xl-4 mx-auto align-self-center text-center">
-                            <img src="https://apm-wow.maxmind.ma/link_/img/LOGO_WOW.png" alt="..." style="max-width: 150px" class="avatar avatar-img rounded-circle">
-                            <br>
-                            <br>
-                            <h3 class="font-weight-normal mb-4">Please Sign In</h3>
-
-                            <div class="form-group">
-                                <label for="login" class="sr-only">Username</label>
-                                <input type="text" id="login" name="login" class="form-control form-control-lg border-0" placeholder="Username" required="" autofocus="">
-                            </div>
-                            <div class="form-group">
-                                <label for="inputPassword" class="sr-only">Password</label>
-                                <input type="password" id="inputPassword" name="password" class="form-control form-control-lg border-0" placeholder="Password" required="">
-                            </div>
-
-                            <div class="my-3 row">
-                                <div class="col-6 col-md py-1 text-left">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
-                                        <label class="custom-control-label" for="customCheck1">Remember Me</label>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-md py-1 text-right text-md-right">
-                                    <a href="forgotpassword.html" class="text-white">Forgot Password?</a>
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <button id="submit-login" type="submit" class="btn btn-lg btn-default default-shadow btn-block">Sign In <span class="ml-2 icon arrow_right"></span></button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div class="toast add-training bottom-center position-fixed mb-5" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
-            <!--<div class="toast-header">
-                <div class="avatar avatar-20 mr-2">
-                    <div class="background">
-                        <img src="{{ asset('img/team1.jpg') }}" class="rounded mr-2" alt="...">
-                    </div>
-                </div>
-                <strong class="mr-auto">maxmind</strong>
-                <small>Just now</small>
-                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>-->
-            <div class="toast-body bg-warning text-light">
-                <p>Error while connecting.</p>
-                <p>Check your login credentials.</p>
-            </div>
-        </div>
+        @yield('content')
     </main>
     <!-- End of page content -->
 
@@ -205,12 +142,10 @@
 
                         var myHeaders = new Headers();
                         // myHeaders.append("Cookie", "__cfduid=d21ca664d247261671437bc46adc106d01608896722");
-                        let login = 'grulog23@gmail.com';
-                        let password = 'Gfirst04091990.';
 
                         var formdata = new FormData();
-                        formdata.append("email", login);
-                        formdata.append("password", password);
+                        formdata.append("email", "grulog23@gmail.com");
+                        formdata.append("password", "Gfirst04091990.");
 
                         var requestOptions = {
                             method: 'POST',
@@ -219,8 +154,7 @@
                             redirect: 'follow'
                         };
 
-                        // fetch("https://apm-test.maxmind.ma/api/login", requestOptions)
-                        fetch("{{ route('api.login') }}", requestOptions)
+                        fetch("https://apm-test.maxmind.ma/api/login", requestOptions)
                             .then(response => response.text())
                             .then(result => {
                                 result = JSON.parse(result);
@@ -236,8 +170,6 @@
                                     let form = $(`<form action="${url}" method="post">
                                         <input type="hidden" name="_token" value="${$('meta[name="csrf-token"]').attr('content')}" />
                                         <input type="hidden" name="api_token" value="${result.success.token}" />
-                                        <input type="hidden" name="login" value="${login}" />
-                                        <input type="hidden" name="password" value="${password}" />
                                     </form>`);
                                     $('body').append(form);
                                     form.submit();

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,9 @@ use App\Http\Controllers\Api\UserController;
 Route::group(['middleware' => 'cors'], function () {
     Route::post('login', [UserController::class, 'login'])->name('api.login');
     Route::post('register', [UserController::class, 'register'])->name('api.register');
+
+    // Login test via api
+    Route::post('login-test', [AuthController::class, 'login'])->name('api.login-test');
 
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('user', [UserController::class, 'user'])->name('api.user');

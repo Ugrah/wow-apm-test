@@ -1,555 +1,397 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <meta name="api_token" content="{{ $_COOKIE['api_token']??'' }}">
-
-    <title>{{ config('app.name') }}</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <!-- Styles -->
-    <style>
-        /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
-        html {
-            line-height: 1.15;
-            -webkit-text-size-adjust: 100%
-        }
-
-        body {
-            margin: 0
-        }
-
-        a {
-            background-color: transparent
-        }
-
-        [hidden] {
-            display: none
-        }
-
-        html {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-            line-height: 1.5
-        }
-
-        *,
-        :after,
-        :before {
-            box-sizing: border-box;
-            border: 0 solid #e2e8f0
-        }
-
-        a {
-            color: inherit;
-            text-decoration: inherit
-        }
-
-        svg,
-        video {
-            display: block;
-            vertical-align: middle
-        }
-
-        video {
-            max-width: 100%;
-            height: auto
-        }
-
-        .bg-white {
-            --bg-opacity: 1;
-            background-color: #fff;
-            background-color: rgba(255, 255, 255, var(--bg-opacity))
-        }
-
-        .bg-gray-100 {
-            --bg-opacity: 1;
-            background-color: #f7fafc;
-            background-color: rgba(247, 250, 252, var(--bg-opacity))
-        }
-
-        .border-gray-200 {
-            --border-opacity: 1;
-            border-color: #edf2f7;
-            border-color: rgba(237, 242, 247, var(--border-opacity))
-        }
-
-        .border-t {
-            border-top-width: 1px
-        }
-
-        .flex {
-            display: flex
-        }
-
-        .grid {
-            display: grid
-        }
-
-        .hidden {
-            display: none
-        }
-
-        .items-center {
-            align-items: center
-        }
-
-        .justify-center {
-            justify-content: center
-        }
-
-        .font-semibold {
-            font-weight: 600
-        }
-
-        .h-5 {
-            height: 1.25rem
-        }
-
-        .h-8 {
-            height: 2rem
-        }
-
-        .h-16 {
-            height: 4rem
-        }
-
-        .text-sm {
-            font-size: .875rem
-        }
-
-        .text-lg {
-            font-size: 1.125rem
-        }
-
-        .leading-7 {
-            line-height: 1.75rem
-        }
-
-        .mx-auto {
-            margin-left: auto;
-            margin-right: auto
-        }
-
-        .ml-1 {
-            margin-left: .25rem
-        }
-
-        .mt-2 {
-            margin-top: .5rem
-        }
-
-        .mr-2 {
-            margin-right: .5rem
-        }
-
-        .ml-2 {
-            margin-left: .5rem
-        }
-
-        .mt-4 {
-            margin-top: 1rem
-        }
-
-        .ml-4 {
-            margin-left: 1rem
-        }
-
-        .mt-8 {
-            margin-top: 2rem
-        }
-
-        .ml-12 {
-            margin-left: 3rem
-        }
-
-        .-mt-px {
-            margin-top: -1px
-        }
-
-        .max-w-6xl {
-            max-width: 72rem
-        }
-
-        .min-h-screen {
-            min-height: 100vh
-        }
-
-        .overflow-hidden {
-            overflow: hidden
-        }
-
-        .p-6 {
-            padding: 1.5rem
-        }
-
-        .py-4 {
-            padding-top: 1rem;
-            padding-bottom: 1rem
-        }
-
-        .px-6 {
-            padding-left: 1.5rem;
-            padding-right: 1.5rem
-        }
-
-        .pt-8 {
-            padding-top: 2rem
-        }
-
-        .fixed {
-            position: fixed
-        }
-
-        .relative {
-            position: relative
-        }
-
-        .top-0 {
-            top: 0
-        }
-
-        .right-0 {
-            right: 0
-        }
-
-        .shadow {
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06)
-        }
-
-        .text-center {
-            text-align: center
-        }
-
-        .text-gray-200 {
-            --text-opacity: 1;
-            color: #edf2f7;
-            color: rgba(237, 242, 247, var(--text-opacity))
-        }
-
-        .text-gray-300 {
-            --text-opacity: 1;
-            color: #e2e8f0;
-            color: rgba(226, 232, 240, var(--text-opacity))
-        }
-
-        .text-gray-400 {
-            --text-opacity: 1;
-            color: #cbd5e0;
-            color: rgba(203, 213, 224, var(--text-opacity))
-        }
-
-        .text-gray-500 {
-            --text-opacity: 1;
-            color: #a0aec0;
-            color: rgba(160, 174, 192, var(--text-opacity))
-        }
-
-        .text-gray-600 {
-            --text-opacity: 1;
-            color: #718096;
-            color: rgba(113, 128, 150, var(--text-opacity))
-        }
-
-        .text-gray-700 {
-            --text-opacity: 1;
-            color: #4a5568;
-            color: rgba(74, 85, 104, var(--text-opacity))
-        }
-
-        .text-gray-900 {
-            --text-opacity: 1;
-            color: #1a202c;
-            color: rgba(26, 32, 44, var(--text-opacity))
-        }
-
-        .underline {
-            text-decoration: underline
-        }
-
-        .antialiased {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale
-        }
-
-        .w-5 {
-            width: 1.25rem
-        }
-
-        .w-8 {
-            width: 2rem
-        }
-
-        .w-auto {
-            width: auto
-        }
-
-        .grid-cols-1 {
-            grid-template-columns: repeat(1, minmax(0, 1fr))
-        }
-
-        @media (min-width:640px) {
-            .sm\:rounded-lg {
-                border-radius: .5rem
-            }
-
-            .sm\:block {
-                display: block
-            }
-
-            .sm\:items-center {
-                align-items: center
-            }
-
-            .sm\:justify-start {
-                justify-content: flex-start
-            }
-
-            .sm\:justify-between {
-                justify-content: space-between
-            }
-
-            .sm\:h-20 {
-                height: 5rem
-            }
-
-            .sm\:ml-0 {
-                margin-left: 0
-            }
-
-            .sm\:px-6 {
-                padding-left: 1.5rem;
-                padding-right: 1.5rem
-            }
-
-            .sm\:pt-0 {
-                padding-top: 0
-            }
-
-            .sm\:text-left {
-                text-align: left
-            }
-
-            .sm\:text-right {
-                text-align: right
-            }
-        }
-
-        @media (min-width:768px) {
-            .md\:border-t-0 {
-                border-top-width: 0
-            }
-
-            .md\:border-l {
-                border-left-width: 1px
-            }
-
-            .md\:grid-cols-2 {
-                grid-template-columns: repeat(2, minmax(0, 1fr))
-            }
-        }
-
-        @media (min-width:1024px) {
-            .lg\:px-8 {
-                padding-left: 2rem;
-                padding-right: 2rem
-            }
-        }
-
-        @media (prefers-color-scheme:dark) {
-            .dark\:bg-gray-800 {
-                --bg-opacity: 1;
-                background-color: #2d3748;
-                background-color: rgba(45, 55, 72, var(--bg-opacity))
-            }
-
-            .dark\:bg-gray-900 {
-                --bg-opacity: 1;
-                background-color: #1a202c;
-                background-color: rgba(26, 32, 44, var(--bg-opacity))
-            }
-
-            .dark\:border-gray-700 {
-                --border-opacity: 1;
-                border-color: #4a5568;
-                border-color: rgba(74, 85, 104, var(--border-opacity))
-            }
-
-            .dark\:text-white {
-                --text-opacity: 1;
-                color: #fff;
-                color: rgba(255, 255, 255, var(--text-opacity))
-            }
-
-            .dark\:text-gray-400 {
-                --text-opacity: 1;
-                color: #cbd5e0;
-                color: rgba(203, 213, 224, var(--text-opacity))
-            }
-        }
-    </style>
-
-    <style>
-        body {
-            font-family: 'Nunito';
-        }
-    </style>
-</head>
-
-<body class="antialiased">
-    <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
-        @if (Route::has('login'))
-        <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-            @auth
-            <a href="{{ url('/home') }}" class="text-sm text-gray-700 underline">Home</a>
-            @else
-            <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
-
-            @if (Route::has('register'))
-            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
-            @endif
-            @endauth
-        </div>
-        @endif
-
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-            <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                <svg viewBox="0 0 651 192" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-16 w-auto text-gray-700 sm:h-20">
-                    <g clip-path="url(#clip0)" fill="#EF3B2D">
-                        <path d="M248.032 44.676h-16.466v100.23h47.394v-14.748h-30.928V44.676zM337.091 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.431 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162-.001 2.863-.479 5.584-1.432 8.161zM463.954 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.432 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162 0 2.863-.479 5.584-1.432 8.161zM650.772 44.676h-15.606v100.23h15.606V44.676zM365.013 144.906h15.607V93.538h26.776V78.182h-42.383v66.724zM542.133 78.182l-19.616 51.096-19.616-51.096h-15.808l25.617 66.724h19.614l25.617-66.724h-15.808zM591.98 76.466c-19.112 0-34.239 15.706-34.239 35.079 0 21.416 14.641 35.079 36.239 35.079 12.088 0 19.806-4.622 29.234-14.688l-10.544-8.158c-.006.008-7.958 10.449-19.832 10.449-13.802 0-19.612-11.127-19.612-16.884h51.777c2.72-22.043-11.772-40.877-33.023-40.877zm-18.713 29.28c.12-1.284 1.917-16.884 18.589-16.884 16.671 0 18.697 15.598 18.813 16.884h-37.402zM184.068 43.892c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002-35.648-20.524a2.971 2.971 0 00-2.964 0l-35.647 20.522-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v38.979l-29.706 17.103V24.493a3 3 0 00-.103-.776c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002L40.098 1.396a2.971 2.971 0 00-2.964 0L1.487 21.919l-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v122.09c0 1.063.568 2.044 1.489 2.575l71.293 41.045c.156.089.324.143.49.202.078.028.15.074.23.095a2.98 2.98 0 001.524 0c.069-.018.132-.059.2-.083.176-.061.354-.119.519-.214l71.293-41.045a2.971 2.971 0 001.489-2.575v-38.979l34.158-19.666a2.971 2.971 0 001.489-2.575V44.666a3.075 3.075 0 00-.106-.774zM74.255 143.167l-29.648-16.779 31.136-17.926.001-.001 34.164-19.669 29.674 17.084-21.772 12.428-43.555 24.863zm68.329-76.259v33.841l-12.475-7.182-17.231-9.92V49.806l12.475 7.182 17.231 9.92zm2.97-39.335l29.693 17.095-29.693 17.095-29.693-17.095 29.693-17.095zM54.06 114.089l-12.475 7.182V46.733l17.231-9.92 12.475-7.182v74.537l-17.231 9.921zM38.614 7.398l29.693 17.095-29.693 17.095L8.921 24.493 38.614 7.398zM5.938 29.632l12.475 7.182 17.231 9.92v79.676l.001.005-.001.006c0 .114.032.221.045.333.017.146.021.294.059.434l.002.007c.032.117.094.222.14.334.051.124.088.255.156.371a.036.036 0 00.004.009c.061.105.149.191.222.288.081.105.149.22.244.314l.008.01c.084.083.19.142.284.215.106.083.202.178.32.247l.013.005.011.008 34.139 19.321v34.175L5.939 144.867V29.632h-.001zm136.646 115.235l-65.352 37.625V148.31l48.399-27.628 16.953-9.677v33.862zm35.646-61.22l-29.706 17.102V66.908l17.231-9.92 12.475-7.182v33.841z" />
+@extends('layouts.app')
+
+
+@section('content')
+<style>
+    .svg__admin {
+        width: 40px;
+    }
+
+    .img__home {
+        max-width: 50px
+    }
+
+    a.disabled {
+        pointer-events: none;
+        cursor: default;
+        text-decoration: none;
+        color: black;
+    }
+
+    .bootstrap-select {
+        width: 100% !important;
+    }
+
+    div.dropdown.bootstrap-select [data-id="terminals"] {
+        display: none
+    }
+</style>
+<div class="container mt-2">
+    <div class="logo col-12 mb-5 align-self-center text-center">
+        <!-- <img src="https://apm-wow.maxmind.ma/link/img/LOGO_WOW.png" alt="..." style="max-width: 150px" class="avatar avatar-img rounded-circle"> -->
+        <img src="{{ asset('img/icons/wow/APM_WOW_New_Model_Poster_Logo_V1.png') }}" alt="" class="img-fluid" style="max-width:160px">
+        <!-- <svg style="max-width:200px" version="1.1" id="Lag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 841.9 595.3" style="enable-background:new 0 0 841.9 595.3;" xml:space="preserve">
+
+            <g>
+                <path class="st0" d="M517.9,543.8" />
+            </g>
+            <g>
+                <path class="st1" d="M421.1,288.9c-7.7,0-13.9-6.2-13.9-13.9s6.2-13.9,13.9-13.9s13.9,6.2,13.9,13.9S428.7,288.9,421.1,288.9
+							M431.5,290.7c5.1-3.4,8.5-9.2,8.5-15.8c0-10.4-8.5-18.9-18.9-18.9s-18.9,8.5-18.9,18.9c0,6.6,3.4,12.4,8.5,15.8
+							c-11.6,4.3-19.8,15.4-19.8,28.4h5c0-13.9,11.3-25.2,25.2-25.2s25.2,11.3,25.2,25.2h5C451.3,306.1,443,295,431.5,290.7" />
+            </g>
+            <g>
+                <path class="st1" d="M456.7,278.1c5.1-3.4,8.5-9.2,8.5-15.8c0-10.4-8.5-18.9-18.9-18.9c-5.1,0-9.6,2-13,5.2
+						c-1.3,1.2-2.3,2.6-3.2,4.1c1.6,0.6,3.1,1.4,4.5,2.4c0.9-1.5,2-2.7,3.4-3.8c2.3-1.8,5.3-2.9,8.4-2.9c7.7,0,13.9,6.2,13.9,13.9
+						c0,6.4-4.3,11.7-10.1,13.3c-1.2,0.3-2.4,0.5-3.7,0.5c-0.4,0-0.9,0-1.3-0.1c-0.1,1.8-0.4,3.6-0.8,5.3c0.7-0.1,1.4-0.2,2.2-0.2
+						c1,0,2,0.1,3,0.2c12.5,1.5,22.2,12.1,22.2,25h5C476.6,293.5,468.3,282.4,456.7,278.1" />
+            </g>
+            <g>
+                <path class="st1" d="M395.8,281.3c0.7,0,1.5,0.1,2.2,0.2c-0.5-1.7-0.8-3.5-0.9-5.3c-0.4,0-0.9,0.1-1.3,0.1c-1.3,0-2.6-0.2-3.7-0.5
+					c-5.8-1.6-10.1-7-10.1-13.3c0-7.7,6.2-13.9,13.9-13.9c3.2,0,6.1,1.1,8.4,2.9c1.3,1,2.5,2.3,3.4,3.8c1.4-0.9,2.9-1.7,4.5-2.4
+					c-0.9-1.5-2-2.9-3.2-4.1c-3.4-3.2-8-5.2-13-5.2c-10.4,0-18.9,8.5-18.9,18.9c0,6.6,3.4,12.4,8.5,15.8c-11.6,4.3-19.8,15.4-19.8,28.4
+					h5c0-12.9,9.7-23.5,22.2-25C393.8,281.4,394.8,281.3,395.8,281.3" />
+            </g>
+            <g>
+                <path class="st1" d="M474.4,260.5c5.1-3.4,8.5-9.2,8.5-15.8c0-10.4-8.5-18.9-18.9-18.9c-5.1,0-9.6,2-13,5.2
+						c-1.3,1.2-2.3,2.6-3.2,4.1c1.6,0.6,3.1,1.4,4.5,2.4c0.9-1.5,2-2.7,3.4-3.8c2.3-1.8,5.3-2.9,8.4-2.9c7.7,0,13.9,6.2,13.9,13.9
+						c0,5.6-3.3,10.4-8.1,12.6c0.2,1.2,0.3,2.4,0.3,3.7c0,1.1-0.1,2.3-0.3,3.4c11.1,2.6,19.4,12.6,19.4,24.5h5
+						C494.2,275.8,485.9,264.7,474.4,260.5" />
+            </g>
+            <g>
+                <path class="st1" d="M372,261c0-1.3,0.1-2.5,0.3-3.7c-4.8-2.2-8.1-7-8.1-12.6c0-7.7,6.2-13.9,13.9-13.9c3.2,0,6.1,1.1,8.4,2.9
+						c1.3,1,2.5,2.3,3.4,3.8c1.4-0.9,2.9-1.7,4.5-2.4c-0.9-1.5-2-2.9-3.2-4.1c-3.4-3.2-8-5.2-13-5.2c-10.4,0-18.9,8.5-18.9,18.9
+						c0,6.6,3.4,12.4,8.5,15.8c-11.6,4.3-19.8,15.4-19.8,28.4h5c0-11.9,8.3-21.9,19.4-24.5C372.2,263.2,372,262.1,372,261" />
+            </g>
+            <g>
+                <path class="st1" d="M421.1,230.8c6.7,0,12.3,4.9,13.6,11.3c2.8-1.7,4.8-2,4.8-2c-2.1-8.2-9.5-14.3-18.3-14.3
+							c-8.8,0-16.2,6.1-18.3,14.3c0,0,2,0.4,4.8,2C408.7,235.7,414.3,230.8,421.1,230.8" />
+            </g>
+            <g>
+                <path class="st2" d="M528.8,545.2l-7-16.1c67.9-29.6,119.2-87.1,140.8-157.8l16.8,5.2C656.3,452,601.4,513.6,528.8,545.2z
+							M311.2,544.6c-54.8-24.3-100.6-66.8-128.9-119.6l15.5-8.3c26.5,49.4,69.3,89.2,120.5,111.9L311.2,544.6z M661.7,220.4
+							c-12.6-39.4-35-75.5-64.8-104.5c-29.9-29-66.7-50.4-106.5-61.8l4.8-16.9c42.6,12.2,82,35,113.9,66.1c31.9,31,55.9,69.6,69.3,111.8
+							L661.7,220.4z M198.7,176.3l-15.5-8.4c16.6-30.4,38.5-57,65.3-79.1c27-22.3,57.5-38.9,90.7-49.4l5.3,16.8
+							c-31,9.8-59.6,25.4-84.8,46.2C234.7,123,214.2,147.9,198.7,176.3z" />
+            </g>
+            <g>
+                <g>
+                    <g>
+                        <path class="st3" d="M637.9,297.2c0-112.5-85.6-205.1-195.3-216c-7-0.7-14-1.1-21.2-1.1l25.2,40.8l-25.2,40.8
+								c6.7,0,13.2,0.5,19.6,1.5c65.3,9.8,115.3,66.1,115.3,134.1c0,67.8-49.7,123.9-114.7,134c-6.8,1-13.7,1.6-20.8,1.6h-0.8
+								l-25.2,40.8l25.2,40.8h0.7c6.5,0,13-0.3,19.4-0.8C551,503.7,637.9,410.6,637.9,297.2" />
                     </g>
-                </svg>
-            </div>
+                    <g>
+                        <path class="st4" d="M654.9,297.2c0-129.3-104.8-234.1-234.1-234.1c-3.3,0-6.5,0.1-9.7,0.2l10.4,16.8c7.2,0,14.2,0.4,21.2,1.1
+								c109.6,11,195.3,103.5,195.3,216c0,113.4-86.9,206.5-197.7,216.3c-6.4,0.6-12.8,0.8-19.4,0.8h-0.7l10.4,16.8
+								C555.3,526,654.9,423.3,654.9,297.2" />
+                    </g>
+                </g>
+                <g>
+                    <g>
+                        <path class="st5" d="M446.6,120.9l-25.2-40.8h-0.6c-6.5,0-13,0.3-19.4,0.8c-110.8,9.8-197.7,102.9-197.7,216.2
+							c0,112.5,85.6,205.1,195.3,216c7,0.7,14,1.1,21.2,1.1l-25.2-40.8l25.2-40.8c-6.7,0-13.2-0.5-19.6-1.5
+							c-65.3-9.8-115.3-66.1-115.3-134.1c0-67.8,49.7-123.9,114.7-134c6.8-1.1,13.8-1.6,20.9-1.6h0.6L446.6,120.9z" />
+                    </g>
+                    <g>
+                        <path class="st6" d="M420.8,80.1h0.6L411,63.3c-124.8,5.1-224.4,107.9-224.4,233.9c0,129.3,104.8,234.1,234.1,234.1
+								c3.3,0,6.5-0.1,9.7-0.2l-10.4-16.8c-7.2,0-14.2-0.4-21.2-1.1c-109.6-11-195.3-103.5-195.3-216c0-113.4,86.9-206.4,197.7-216.2
+								C407.8,80.4,414.2,80.1,420.8,80.1" />
+                    </g>
+                </g>
+            </g>
+            <g>
+                <path class="st1" d="M488.1,360.2c0.7,2.8,3.1,4,5.9,4c2.7,0,5.8-1.3,5.8-4.4c0-1.4-0.7-2.7-1.9-3.3c-1.1-0.6-2.5-0.8-3.7-1
+						c-0.5-0.1-1.5-0.2-1.5-0.9c0-0.7,0.8-0.8,1.3-0.8c1,0,1.7,0.3,2.1,1.3l3.3-1c-0.8-2.3-3-3.2-5.3-3.2c-1.3,0-2.7,0.2-3.8,1
+						c-1,0.7-1.7,2-1.7,3.3c0,3.1,2.9,3.8,5.4,4.3c0.6,0.1,1.6,0.3,1.6,1.1c0,0.7-1,0.8-1.5,0.8c-1.2,0-2-0.4-2.4-1.6L488.1,360.2z
+						M479.9,353.7h1.6c0.4,0,0.8,0,1.1,0.2c0.4,0.2,0.6,0.6,0.6,1.1c0,1.1-1,1.3-1.9,1.3h-1.5V353.7z M479.9,359h1.3l1.9,5h4.5
+						l-2.4-5.7c1.5-0.7,2.3-1.7,2.3-3.5c0-1.3-0.5-2.4-1.6-3.1c-1-0.6-2.2-0.8-3.4-0.8h-6.7V364h4.1V359z M474.2,360.9h-5.9v-2.1h4.8
+						v-2.9h-4.8V354h5.9v-3h-9.8V364h9.8V360.9z M462.3,350.9H457l-1.8,6.9h0l-1.9-6.9h-5.2V364h3v-9.4h0l2.5,9.4h2.6l2.4-9.4h0v9.4h3.7
+						V350.9z M440.4,353.7c1.8,0,2,2.6,2,3.8c0,1.3-0.1,3.7-2,3.7c-1.8,0-2-2.4-2-3.7C438.4,356.3,438.6,353.7,440.4,353.7 M440.4,350.8
+						c-4,0-6.3,2.9-6.3,6.8c0,3.7,2.3,6.7,6.3,6.7s6.3-3,6.3-6.7C446.6,353.6,444.4,350.8,440.4,350.8 M430.8,354.1h2.7v-3.1h-9.3v3.1
+						h2.7v9.9h3.8V354.1z M411.7,360.2c0.7,2.8,3.1,4,5.9,4c2.7,0,5.8-1.3,5.8-4.4c0-1.4-0.7-2.7-1.9-3.3c-1.1-0.6-2.5-0.8-3.7-1
+						c-0.5-0.1-1.5-0.2-1.5-0.9c0-0.7,0.8-0.8,1.3-0.8c1,0,1.7,0.3,2.1,1.3l3.3-1c-0.8-2.3-3-3.2-5.3-3.2c-1.3,0-2.7,0.2-3.8,1
+						c-1,0.7-1.7,2-1.7,3.3c0,3.1,2.9,3.8,5.4,4.3c0.6,0.1,1.6,0.3,1.6,1.1c0,0.7-1,0.8-1.5,0.8c-1.2,0-2-0.4-2.4-1.6L411.7,360.2z
+						M410.5,350.9h-3.1v8c0,0.6,0.1,1.3-0.5,1.7c-0.3,0.3-0.9,0.4-1.4,0.4c-0.5,0-1.1-0.2-1.4-0.6c-0.3-0.4-0.2-1-0.2-1.4v-8.2h-4.1
+						v8.6c0,1.6,0.3,2.8,1.7,3.7c1,0.7,2.6,0.9,3.8,0.9c1.4,0,2.7-0.2,3.9-1.1c1.3-1,1.4-2.2,1.4-3.8V350.9z M394.5,359
+						c-0.1,1.1-0.5,2.2-1.8,2.2c-1.8,0-1.9-2.2-1.9-3.5c0-1.2,0.1-4,1.9-4c1.4,0,1.8,1.4,1.7,2.5l3.7-0.2c-0.3-3.3-2.2-5.2-5.5-5.2
+						c-4.1,0-5.9,3.1-5.9,6.9c0,3.7,2.1,6.6,6,6.6c3,0,5.2-1.9,5.5-5L394.5,359z M372.6,353.7h1.6c0.4,0,0.8,0,1.1,0.2
+						c0.4,0.2,0.6,0.6,0.6,1.1c0,1.1-1.1,1.3-1.9,1.3h-1.5V353.7z M372.6,359h1.3l1.9,5h4.5l-2.4-5.7c1.5-0.7,2.3-1.7,2.3-3.5
+						c0-1.3-0.5-2.4-1.6-3.1c-1-0.6-2.2-0.8-3.4-0.8h-6.7V364h4.1V359z M366.6,350.9h-3.1v8c0,0.6,0.1,1.3-0.5,1.7
+						c-0.3,0.3-0.9,0.4-1.4,0.4c-0.5,0-1.1-0.2-1.4-0.6c-0.3-0.4-0.2-1-0.2-1.4v-8.2h-4.1v8.6c0,1.6,0.3,2.8,1.7,3.7
+						c1,0.7,2.6,0.9,3.8,0.9c1.4,0,2.7-0.2,3.9-1.1c1.3-1,1.4-2.2,1.4-3.8V350.9z M348.4,353.7c1.8,0,2,2.6,2,3.8c0,1.3-0.1,3.7-2,3.7
+						s-2-2.4-2-3.7C346.4,356.3,346.6,353.7,348.4,353.7 M348.4,350.8c-4,0-6.3,2.9-6.3,6.8c0,3.7,2.3,6.7,6.3,6.7s6.3-3,6.3-6.7
+						C354.7,353.6,352.4,350.8,348.4,350.8" />
+            </g>
+            <g>
+                <path class="st5" d="M182.9,199l-2.6,6.7l-2.4-0.9l2.1-5.4l-3.3-1.3l-2.1,5.4l-2.2-0.8l2.6-6.7l-3.4-1.3l-4.3,11.1l14.8,5.7
+						l4.3-11.1L182.9,199z M173.4,218.7c1.2,0.5,2.3,1.4,1.9,2.9c-0.7,2.1-3.3,1.4-4.8,0.9c-1.4-0.5-4.6-1.5-3.9-3.6
+						c0.5-1.6,2.3-1.5,3.5-1.1l1.2-4.4c-3.9-0.9-6.9,0.6-8.1,4.5c-1.5,4.8,1.4,8,5.8,9.4c4.3,1.4,8.4,0,9.8-4.5c1.1-3.5-0.3-6.8-3.7-8.1
+						L173.4,218.7z M175.2,234.2l-15.5-3.7l-0.9,3.9l4.3,1l4.4,0.7l0,0.1l-9.9,3.1l-1.1,4.5l15.5,3.7l0.9-3.9l-7.2-1.7
+						c-1.1-0.3-1.6-0.3-2.7-0.3l-0.2,0l0-0.1l3.1-0.7l8.3-2.7L175.2,234.2z M163.4,259.8l-4.4-2l4.8-0.6L163.4,259.8z M170.6,256.5
+						l0.8-4.9l-16.5,2.4l-0.8,5.1l14.9,7.4l0.6-3.9l-2.9-1.5l0.7-4.2L170.6,256.5z M152.8,269.6l-0.5,6.4l8.2,2.9l0,0l-8.6,1.6l-0.5,6.4
+						l15.9,1.3l0.3-3.7l-11.3-0.9l0,0l11.6-2l0.3-3.1l-11.1-3.8l0,0l11.3,0.9l0.4-4.5L152.8,269.6z M154.8,302l0-2c0-0.5,0-1,0.2-1.4
+						c0.3-0.5,0.8-0.8,1.3-0.8c1.4,0,1.5,1.3,1.5,2.3l0,1.8L154.8,302z M161.3,302l0-1.5l6.1-2.4l0-5.4l-6.9,2.9
+						c-0.9-1.9-2.1-2.8-4.2-2.8c-1.6,0-3,0.6-3.8,2c-0.8,1.2-1,2.7-0.9,4.1l0.1,8.1l15.9-0.1l0-4.9L161.3,302z M155.7,320
+						c-0.2-2.1,2.9-2.6,4.4-2.8c1.5-0.1,4.5-0.2,4.7,2c0.2,2.2-2.7,2.6-4.3,2.7C159,322.1,155.9,322.1,155.7,320 M152.1,320.3
+						c0.4,4.8,4.1,7.3,8.8,6.9c4.5-0.4,7.9-3.4,7.5-8.2c-0.4-4.8-4.2-7.3-8.7-6.9C155,312.4,151.7,315.4,152.1,320.3 M163.7,332.3
+						l-3.5,0.5l0.7,5.1l-2.6,0.4l-1-6.7l-3.7,0.5l1.7,11.4l15.7-2.3l-0.7-4.7l-5.9,0.9L163.7,332.3z M161.5,357.4l-0.4-1.9
+						c-0.1-0.5-0.2-1-0.1-1.4c0.1-0.5,0.6-0.9,1.1-1c1.3-0.3,1.8,0.9,2,2l0.4,1.7L161.5,357.4z M167.8,356.1l-0.3-1.5l5.5-3.5l-1.1-5.3
+						l-6.2,4.2c-1.2-1.7-2.6-2.3-4.7-1.9c-1.5,0.3-2.8,1.2-3.3,2.7c-0.5,1.3-0.4,2.9-0.1,4.2l1.7,7.9l15.6-3.3l-1-4.8L167.8,356.1z
+						M172.5,365.3l2,6.9l-2.5,0.7l-1.6-5.6l-3.4,1l1.6,5.6l-2.2,0.6l-2-6.9l-3.5,1l3.3,11.5l15.3-4.4l-3.3-11.5L172.5,365.3z
+						M175.4,391.4l-2.9,1.1l-0.5-1.3c-0.4-1-0.7-2.2,0.6-2.7c1.4-0.5,1.9,0.7,2.3,1.8L175.4,391.4z M178.6,390.2l-0.9-2.3
+						c-0.5-1.4-1.3-2.8-2.7-3.6c-1.3-0.8-2.9-0.8-4.3-0.3c-1.6,0.6-2.8,2-3.1,3.7c-0.3,1.6,0.3,3.2,0.8,4.7l2.3,6.1l14.9-5.6l-1.7-4.6
+						L178.6,390.2z" />
+            </g>
+            <g>
+                <path class="st3" d="M674,346.2l1.2-7.1l2.5,0.4l-1,5.7l3.5,0.6l1-5.7l2.3,0.4l-1.2,7.1l3.6,0.6l2-11.8l-15.7-2.7l-2,11.8
+						L674,346.2z M676.7,330l0.7-6.2l11.9,1.3l0.5-4.9l-15.8-1.7l-1.2,11.1L676.7,330z M683.9,305.4l3.1,0.1l-0.1,1.4
+						c0,1.1-0.2,2.3-1.6,2.2c-1.5-0.1-1.5-1.4-1.4-2.5L683.9,305.4z M680.5,305.3l-0.1,2.5c-0.1,1.5,0.1,3.1,1,4.4
+						c0.9,1.2,2.3,1.9,3.8,1.9c1.7,0.1,3.3-0.7,4.3-2.2c0.8-1.3,1-3.1,1-4.6l0.3-6.5l-15.9-0.7l-0.2,4.9L680.5,305.3z M687.2,287.6
+						c0.1,2.2-3,2.5-4.6,2.5c-1.5,0-4.5,0-4.5-2.2c-0.1-2.2,2.9-2.5,4.4-2.5C684,285.3,687.1,285.4,687.2,287.6 M690.8,287.4
+						c-0.2-4.8-3.7-7.5-8.5-7.3c-4.5,0.1-8,3-7.9,7.9c0.2,4.8,3.9,7.5,8.4,7.3C687.5,295.2,690.9,292.3,690.8,287.4 M677.7,275.7
+						l-0.7-7.1l2.6-0.2l0.5,5.8l3.5-0.3l-0.5-5.8l2.3-0.2l0.7,7.1l3.6-0.3l-1.1-11.9l-15.8,1.5l1.1,11.9L677.7,275.7z M679.6,249.5
+						l3-0.5l0.2,1.4c0.2,1.1,0.3,2.3-1.1,2.5c-1.5,0.3-1.8-1.1-1.9-2.2L679.6,249.5z M676.3,250.1l0.4,2.4c0.3,1.5,0.8,3,1.9,4.1
+						c1.1,1,2.7,1.3,4.1,1.1c1.7-0.3,3.1-1.4,3.7-3c0.5-1.5,0.3-3.2,0-4.7l-1.1-6.4l-15.7,2.7l0.8,4.9L676.3,250.1z" />
+            </g>
+            <g>
+                <path class="st1" d="M464.5,47.3l2.3-15.7l-3.9-0.6l-0.6,4.4l-0.3,4.4l-0.1,0l-4-9.6l-4.6-0.7L451,45.3l3.9,0.6l1.1-7.3
+						c0.2-1.1,0.1-1.6,0.1-2.7l0-0.2l0.1,0l1,3l3.4,8L464.5,47.3z M446.3,41.1l-7.1-0.6l0.2-2.6l5.8,0.5l0.3-3.5l-5.8-0.5l0.2-2.3
+						l7.1,0.6l0.3-3.7l-11.9-1L434,43.9l11.9,1L446.3,41.1z M429.6,40l-7-0.1l7-8.9l0.1-3.1l-12.5-0.2l-0.1,3.7l6.5,0.1l-7.2,9l-0.1,3
+						l13.2,0.3L429.6,40z M411.1,28l-4.9,0.2l0.7,15.9l4.9-0.2L411.1,28z M392.5,38.6l0.9-4.7l1.7,4.5L392.5,38.6z M397.5,44.8l5-0.5
+						L396,28.9l-5.1,0.5l-3.4,16.3l3.9-0.4l0.7-3.2l4.2-0.4L397.5,44.8z M384.6,46.2l-6.6-9.1l3-6.4l-4.3,0.7l-3.2,7.2l-1.1-6.5
+						l-4.5,0.8l2.7,15.7l4.5-0.8l-0.6-3.6l1.3-2.6l3.7,5.5L384.6,46.2z" />
+            </g>
+            <g>
+                <path class="st1" d="M486.8,554.3c1.8,3.1,5,3.6,8.2,2.7c3.2-0.9,6.4-3.5,5.3-7.1c-0.5-1.7-1.7-2.9-3.4-3.2c-1.5-0.3-3.1-0.1-4.7,0
+						c-0.6,0-1.8,0.2-2-0.6s0.6-1.2,1.2-1.4c1.2-0.3,2.1-0.2,2.9,0.8l3.5-2.3c-1.7-2.4-4.6-2.7-7.2-2c-1.5,0.4-3.1,1.2-4.1,2.4
+						c-1,1.2-1.3,2.9-0.8,4.4c1.1,3.6,4.7,3.4,7.7,3.1c0.7-0.1,2-0.2,2.2,0.7c0.2,0.8-0.9,1.3-1.5,1.5c-1.4,0.4-2.5,0.2-3.3-1
+						L486.8,554.3z M473.7,558.1l-1.8-8.4l0.5-0.1c1.1-0.2,1.8-0.4,2.8,0.3c0.8,0.7,1.4,2,1.6,3.1c0.2,1,0.3,2.1-0.1,3.1
+						c-0.2,0.5-0.4,0.9-0.8,1.2c-0.5,0.4-0.9,0.5-1.6,0.6L473.7,558.1z M469.6,562.7l6.1-1.3c2.2-0.5,4-1.4,5.2-3.3
+						c1.1-1.8,1.4-4.1,1-6.1c-0.5-2.2-1.7-4.2-3.6-5.4c-2-1.3-3.9-1.2-6.1-0.7l-5.7,1.2L469.6,562.7z M453.2,552.5l2-0.3
+						c0.5-0.1,1-0.1,1.4,0c0.5,0.2,0.9,0.7,0.9,1.2c0.2,1.4-1.1,1.7-2.1,1.8l-1.8,0.2L453.2,552.5z M454,558.8l1.5-0.2l3.1,5.7l5.4-0.7
+						l-3.8-6.5c1.7-1.1,2.5-2.5,2.2-4.5c-0.2-1.5-1-2.9-2.4-3.5c-1.3-0.6-2.8-0.6-4.2-0.4l-8,1.1l2.1,15.8l4.9-0.7L454,558.8z M435,560
+						l1-4.7l1.6,4.5L435,560z M439.8,566.3l5-0.3l-6.1-15.5l-5.1,0.4l-3.8,16.2l4-0.3l0.8-3.2l4.2-0.3L439.8,566.3z M416.3,563.3
+						l0.1-8.6l0.6,0c1.1,0,1.9,0,2.6,0.9c0.7,0.9,1,2.3,1,3.3c0,1.1-0.2,2.1-0.8,3.1c-0.3,0.4-0.6,0.8-1.1,1c-0.6,0.3-1,0.3-1.7,0.3
+						L416.3,563.3z M411.4,566.9l6.2,0c2.2,0,4.2-0.5,5.8-2.1c1.5-1.5,2.2-3.7,2.2-5.8c0-2.3-0.7-4.5-2.4-6c-1.7-1.7-3.5-2-5.8-2l-5.9,0
+						L411.4,566.9z M404.8,566.5l1.3-15.9l-4-0.3l-0.4,4.4l0,4.4l0,0l-4.6-9.3l-4.6-0.4l-1.3,15.9l4,0.3l0.6-7.4c0.1-1.1,0-1.6-0.1-2.7
+						l0-0.2l0.1,0l1.2,3l3.9,7.8L404.8,566.5z M377.6,556.8l2-4.4l0.6,4.8L377.6,556.8z M381,564l4.9,0.7l-2.6-16.5l-5.1-0.7l-7.2,15
+						l3.9,0.6l1.4-3l4.2,0.6L381,564z M367.5,549.3l3.2,0.7l0.8-3.7l-11-2.3l-0.8,3.7l3.3,0.7l-2.5,11.8l4.5,1L367.5,549.3z M340,549.9
+						c-0.1,3.6,2.4,5.7,5.6,6.6c3.2,0.9,7.2,0.4,8.3-3.3c0.5-1.7,0.1-3.3-1.2-4.5c-1.1-1.1-2.6-1.7-4-2.4c-0.5-0.3-1.6-0.8-1.4-1.6
+						c0.2-0.8,1.2-0.7,1.8-0.6c1.2,0.3,1.9,1,2.1,2.2l4.2-0.1c-0.2-2.9-2.5-4.7-5.1-5.5c-1.5-0.4-3.2-0.6-4.7-0.1
+						c-1.5,0.5-2.6,1.8-3,3.3c-1,3.6,2.2,5.4,4.9,6.7c0.7,0.3,1.8,0.8,1.5,1.8c-0.2,0.8-1.5,0.6-2.1,0.4c-1.4-0.4-2.3-1.2-2.3-2.6
+						L340,549.9z" />
+            </g>
+        </svg> -->
 
-            <!-- <span style="color: #fff"></span> -->
+    </div>
+</div>
 
-            <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-                <div class="grid grid-cols-1 md:grid-cols-2">
-                    <div class="p-6">
-                        <div class="flex items-center">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500">
-                                <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                            </svg>
-                            <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel.com/docs" class="underline text-gray-900 dark:text-white">Documentation</a></div>
-                        </div>
+<div class="container mt-2">
+    <div class="row">
 
-                        <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                Laravel has wonderful, thorough documentation covering every aspect of the framework. Whether you are new to the framework or have previous experience with Laravel, we recommend reading all of the documentation from beginning to end.
+        <div class="col-12 col-md-6">
+            <div class="card  border-0 shadow-light mb-4">
+                <div class="card-body position-relative">
+
+                    <div class="row">
+
+                        <div class="col">
+                            @if( Auth::user() )
+                            <a class="user-report px-2" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+                            @else
+                            User not connexted
+                            @endif
+
+
+                            <h3 class="mb-3 text-center text-default">You are here</h3>
+                            <div id="terminals-loader" class="text-center">
+                                <button class="btn btn-primary" type="button" disabled="">
+                                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                    Loading...
+                                </button>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
-                        <div class="flex items-center">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500">
-                                <path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
-                                <path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg>
-                            <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laracasts.com" class="underline text-gray-900 dark:text-white">Laracasts</a></div>
-                        </div>
-
-                        <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development skills in the process.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-6 border-t border-gray-200 dark:border-gray-700">
-                        <div class="flex items-center">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500">
-                                <path d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
-                            </svg>
-                            <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel-news.com/" class="underline text-gray-900 dark:text-white">Laravel News</a></div>
-                        </div>
-
-                        <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                Laravel News is a community driven portal and newsletter aggregating all of the latest and most important news in the Laravel ecosystem, including new package releases and tutorials.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l">
-                        <div class="flex items-center">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500">
-                                <path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">Vibrant Ecosystem</div>
-                        </div>
-
-                        <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                Laravel's robust library of first-party tools and libraries, such as <a href="https://forge.laravel.com" class="underline">Forge</a>, <a href="https://vapor.laravel.com" class="underline">Vapor</a>, <a href="https://nova.laravel.com" class="underline">Nova</a>, and <a href="https://envoyer.io" class="underline">Envoyer</a> help you take your projects to the next level. Pair them with powerful open source libraries like <a href="https://laravel.com/docs/billing" class="underline">Cashier</a>, <a href="https://laravel.com/docs/dusk" class="underline">Dusk</a>, <a href="https://laravel.com/docs/broadcasting" class="underline">Echo</a>, <a href="https://laravel.com/docs/horizon" class="underline">Horizon</a>, <a href="https://laravel.com/docs/sanctum" class="underline">Sanctum</a>, <a href="https://laravel.com/docs/telescope" class="underline">Telescope</a>, and more.
-                            </div>
+                            <select id="terminals" class="selectpicker" data-style="form-control">
+                                <!-- <option>AE004L-01 - KTS-Dubai Office</option>
+                                        <option>AO008L-01 - Luanda Terminal</option>
+                                        <option>AO008L-02 - Namibe Terminal </option>
+                                        <option>AO008L-03 - Panguila </option>
+                                        <option>ISAR026L-01 - Buenos Aires / T4 Terminal</option> -->
+                                <!-- <option>BH004L-01 - Bahrain Terminal</option>
+                                        <option>BJ003L-01 - Cotonou Terminal </option>
+                                        <option>BR008L-01 - Pecem Terminal </option>
+                                        <option>BR013L-01 - Itajai Terminal </option>
+                                        <option>BR025U-01 - Santos Terminal </option> -->
+                                <!-- <option>CI005L-01 - Abidjan Terminal </option>
+                                        <option>CI010L-03 - San Pedro Off Dock </option>
+                                        <option>ISCI010L-04 - San Pedro on Dock Terminal</option>
+                                        <option>CO003U-01 - Buenaventura Terminal</option>
+                                        <option>CO005U-01 - Cartagena Terminal (CCTO)</option> -->
+                                <!-- <option>CR056U-01 - Moin Terminal</option>
+                                        <option>DK109D-01 - Aarhus Terminal</option>
+                                        <option>EG005U-01 - Port Said/SCCT Terminal</option>
+                                        <option>ES002E-01 - Algeciras Terminal</option>
+                                        <option>ES068E-01 - Barcelona Terminal</option> -->
+                                <!-- <option>ES075E-01 - Valencia Terminal</option>
+                                        <option>ES080E-01 - Gij��n Terminal</option>
+                                        <option>ES081E-01 - Castell��n Terminal</option>
+                                        <option>ISJO007L-01 - Aqaba Logistics Village IS (ALV)</option>
+                                        <option>JP003LY-01 - Yokohama Terminal</option> -->
+                                <!-- <option>LR002U-01 - Monrovia Terminal</option>
+                                        <option selected>MA010L-01 - Tangier TC1 Terminal</option>
+                                        <option>MA010L-02 - Tangier TM2 Terminal</option>
+                                        <option>MR005L-01 - Nouakchott Terminal</option>
+                                        <option>MR005L-02 - Nouadhibou Terminal</option> -->
+                                <!-- <option>MX062U-01 - Lazaro Cardenas Terminal</option>
+                                        <option>GE006L-01 - Poti Port</option>
+                                        <option>GH004U-02 - Tema Terminal (MPS)</option>
+                                        <option>GT065U-01 - Quetzal Terminal</option>
+                                        <option>IN015L-01 - GTI Terminal</option> -->
+                                <!-- <option>IN022L-01 - Pipavav Port</option>
+                                        <option>MX065L-01 - Yucat��n Terminal</option>
+                                        <option>ISNL008E-01 - Rotterdam Terminal</option>
+                                        <option>NL030E-01 - The Hague Office</option>
+                                        <option>NL071E-01 - Maasvlakte 2 Terminal</option> -->
+                                <!-- <option>OM003L-01 - Salalah Port</option>
+                                        <option>PA021U-01 - Panama City Office</option>
+                                        <option>PE018U-01 - Callao Terminal</option>
+                                        <option>US003U-01 - Charlotte Office</option>
+                                        <option>US005UL-01 - Los Angeles/Pier 400 Terminal</option> -->
+                                <!-- <option>US070U-01 - Mobile Terminal</option>
+                                        <option>US093U-01 - South Florida/SFCT Terminal</option>
+                                        <option>US107U-02 - Elizabeth Renewal Project</option>
+                                        <option>VN007U-01 - Cai Mep Terminal (CMIT)</option> -->
+                            </select>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
-                <div class="text-center text-sm text-gray-500 sm:text-left">
-                    <div class="flex items-center">
-                        <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="-mt-px w-5 h-5 text-gray-400">
-                            <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                        </svg>
-
-                        <a href="https://laravel.bigcartel.com" class="ml-1 underline">
-                            Shop
-                        </a>
-
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="ml-4 -mt-px w-5 h-5 text-gray-400">
-                            <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                        </svg>
-
-                        <a href="https://github.com/sponsors/taylorotwell" class="ml-1 underline">
-                            Sponsor
-                        </a>
+        <div class="col-12 col-md-6">
+            <div class="card  border-0 shadow-light mb-4">
+                <div class="card-body position-relative">
+                    <div class="row">
+                        <div class="col">
+                            <a href="#" class="user-action" data-url="_ps/" data-type="employee">
+                                <h6 class="mb-1">Login as employee</h6>
+                                <p class="small text-mute">Work in progress</p>
+                            </a>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                    Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
+        <div class="col-12 col-md-6">
+            <div class="card  border-0 shadow-light mb-4">
+                <div class="card-body position-relative">
+                    <div class="row">
+                        <div class="col">
+                            <!-- <a class="disabled text-light" href="#" onclick="return false;"> -->
+                            <a href="#" class="user-action" data-url="./dashboard_.php" data-type="manager">
+                                <h6 class="mb-1">Login as a Manager </h6>
+                                <p class="small text-mute">Work in progress</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="col-12 col-md-6">
+                    <div class="card  border-0 shadow-light  bg-grey mb-4">
+                        <div class="card-body position-relative">
+                            <div class="row">
+                                <div class="col">
+                                    <a class="disabled text-light" href="#" onclick="return false;">
+                                        <h6 class="mb-1">Login as Team Leader </h6>
+                                        <p class="small text-mute">Work in progress</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+        <div class="col-12 col-md-6">
+            <div class="card  border-0 shadow-light mb-4">
+                <div class="card-body position-relative">
+                    <div class="row">
+                        <div class="col">
+                            <a href="#" class="user-action" data-url="_coach/" data-type="coach">
+                                <h6 class="mb-1">Wow Coach</h6>
+                                <p class="small text-mute">Click to proceed</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+            <div class="card  border-0 shadow-light mb-4">
+                <div class="card-body position-relative">
+                    <div class="row">
+                        <div class="col">
+                            <a href="#" class="user-action" data-url="_ps/" data-type="trainer">
+                                <h6 class="mb-1">Login as a Trainer </h6>
+                                <p class="small text-mute">Click to proceed</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+            <div class="card  border-0 shadow-light mb-4">
+                <div class="card-body position-relative">
+                    <div class="row">
+                        <div class="col">
+                            <!-- <a class="" href="./_ps/training_plan.php"> -->
+                            <a href="#" class="user-action" data-url="_ps/" data-type="trainee">
+                                <h6 class="mb-1">Login as a Trainee </h6>
+                                <p class="small text-mute">Click to proceed</p>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        function getMeta(metaName) {
-            const metas = document.getElementsByTagName('meta');
+</div>
 
-            for (let i = 0; i < metas.length; i++) {
-                if (metas[i].getAttribute('name') === metaName) {
-                    return metas[i].getAttribute('content');
-                }
+<script>
+    function getMeta(metaName) {
+        const metas = document.getElementsByTagName('meta');
+
+        for (let i = 0; i < metas.length; i++) {
+            if (metas[i].getAttribute('name') === metaName) {
+                return metas[i].getAttribute('content');
             }
-
-            return '';
         }
 
-        const _apiTokenCookie = getMeta('api_token');
+        return '';
+    }
 
-        var myHeaders = new Headers();
-        myHeaders.append("Authorization", `Bearer ${_apiTokenCookie}`);
-        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-        myHeaders.append("Accept", "application/json");
+    const _apiTokenCookie = getMeta('api_token');
 
-        var requestOptions = {
-            method: 'GET',
-            headers: myHeaders,
-            redirect: 'follow'
-        };
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${_apiTokenCookie}`);
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+    myHeaders.append("Accept", "application/json");
 
-        fetch("{{ env('API_BASE_URL') }}/api/user", requestOptions)
-            .then(response => response.text())
-            .then(result => console.log(result))
-            .catch(error => console.log('error', error));
-    </script>
-</body>
+    var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
 
-</html>
+    fetch("{{ env('API_BASE_URL') }}/api/user", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+</script>
+@endsection

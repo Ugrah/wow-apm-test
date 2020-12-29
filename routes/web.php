@@ -16,9 +16,18 @@ use App\Http\Controllers\User\UserMainController;
 |
 */
 
-Route::get('/', [UserMainController::class, 'userType'])->defaults('_config', ['view' => 'welcome'])->name('user.type');
-Route::post('/', [UserMainController::class, 'userType'])->defaults('_config', ['view' => 'welcome'])->name('user.type');
+Route::get('/', [UserMainController::class, 'userType'])->defaults('_config', ['view' => 'welcome', 'redirect' => 'login'])->name('user.type');
+Route::post('/', [UserMainController::class, 'userType'])->defaults('_config', ['view' => 'welcome', 'redirect' => 'login'])->name('user.type');
 
+
+/*
+|--------------------------------------------------------------------------
+| User Auth Proteced routes
+|--------------------------------------------------------------------------
+|
+*/
+Route::group(['middleware' => 'auth.user'], function () {
+});
 
 
 /*
@@ -26,5 +35,12 @@ Route::post('/', [UserMainController::class, 'userType'])->defaults('_config', [
 | User Login
 |--------------------------------------------------------------------------
 |*/
-Route::get('login', [UserMainController::class, 'login'])->defaults('_config', ['view' => 'user.login'])->name('login');
-Route::post('login', [UserMainController::class, 'signin'])->defaults('_config', ['redirect' => 'user.type'])->name('login');
+Route::get('login', [UserMainController::class, 'login'])->defaults('_config', ['view' => 'user.login', 'redirect' => 'user.type'])->name('login');
+// Route::get('login-test', [UserMainController::class, 'loginTest'])->defaults('_config', ['view' => 'user.login-test', 'redirect' => 'user.type-test'])->name('login_test');
+
+/*
+|--------------------------------------------------------------------------
+| User Logout
+|--------------------------------------------------------------------------
+|*/
+Route::post('logout', [UserMainController::class, 'logout'])->defaults('_config', ['redirect' => 'login'])->name('logout');

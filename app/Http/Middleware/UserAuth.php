@@ -18,9 +18,9 @@ class UserAuth
     */
     public function handle($request, Closure $next)
     {
-        if(!session()->has('api_token')) {
-            return redirect()->route('login');
-        }
+        // if(!Auth::user()) {
+        //     return redirect()->route('login');
+        // }
 
         return $next($request);
     }

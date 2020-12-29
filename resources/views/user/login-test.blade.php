@@ -46,11 +46,7 @@
     </div>
     <!-- Page laoder ends -->
 
-    @if( Auth::user() )
-        User connexted
-    @else
-        User not connexted
-    @endif
+
 
     <!-- Begin page content -->
     <main class="flex-shrink-0 main-container">
@@ -155,6 +151,7 @@
                 spaceBetween: 0,
                 pagination: false,
             });
+            let token = localStorage.getItem('access_token') ?? null,
 
             if ($("#login-form").length > 0) {
                 $("#login-form").validate({
@@ -175,52 +172,22 @@
                         },
                     },
                     submitHandler: function(form) {
-                        // $.ajaxSetup({
-                        //     headers: {
-                        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        //     }
-                        // });
-                        // $('#submit-login').html('Please Wait...');
-                        // $("#submit-login").attr("disabled", true);
-                        // $.ajax({
-                        //     url: "{{ url('login') }}",
-                        //     type: "POST",
-                        //     data: $('#login-form').serialize(),
-                        //     success: function(response) {
-                        //         console.log(response);
-                        //         // return;
-                        //         $('#submit-login').html('Submit');
-                        //         $("#submit-login").attr("disabled", false);
-                        //         if (response.redirectUrl) window.location.replace(response.redirectUrl);
-                        //         // alert(response.message);
-                        //         // document.getElementById("login-form").reset();
-                        //     },
-                        //     error: function(xhr, ajaxOptions, thrownError) {
-                        //         alert(xhr.status);
-                        //         alert(thrownError);
-                        //         $('#submit-login').html('Submit');
-                        //         $("#submit-login").attr("disabled", false);
-                        //     }
-                        // });
 
-                        var myHeaders = new Headers();
+                        let myHeaders = new Headers();
                         // myHeaders.append("Cookie", "__cfduid=d21ca664d247261671437bc46adc106d01608896722");
-                        let login = 'grulog23@gmail.com';
-                        let password = 'Gfirst04091990.';
 
-                        var formdata = new FormData();
-                        formdata.append("email", login);
-                        formdata.append("password", password);
+                        let formdata = new FormData();
+                        formdata.append("email", "grulog23@gmail.com");
+                        formdata.append("password", "Gfirst04091990.");
 
-                        var requestOptions = {
+                        let requestOptions = {
                             method: 'POST',
                             headers: myHeaders,
                             body: formdata,
                             redirect: 'follow'
                         };
 
-                        // fetch("https://apm-test.maxmind.ma/api/login", requestOptions)
-                        fetch("{{ route('api.login') }}", requestOptions)
+                        fetch("{{ route('api.login-test') }}", requestOptions)
                             .then(response => response.text())
                             .then(result => {
                                 result = JSON.parse(result);
@@ -236,8 +203,6 @@
                                     let form = $(`<form action="${url}" method="post">
                                         <input type="hidden" name="_token" value="${$('meta[name="csrf-token"]').attr('content')}" />
                                         <input type="hidden" name="api_token" value="${result.success.token}" />
-                                        <input type="hidden" name="login" value="${login}" />
-                                        <input type="hidden" name="password" value="${password}" />
                                     </form>`);
                                     $('body').append(form);
                                     form.submit();
@@ -248,6 +213,56 @@
                 })
             }
         });
+    </script>
+    <script>
+        export default ({
+            name: 'pages-authentication-login-v2',
+            metaInfo: {
+                title: 'Login'
+            },
+
+            state: {
+                token: localStorage.getItem('access_token'),
+            },
+
+            mutations: {
+                login(state, token) {
+                    state.token = token
+                },
+            },
+
+            data: () => ({
+                form: new Form({
+                    email: '',
+                    password: '',
+                })
+            }),
+
+            methods: {
+
+                login() {
+                    this.form.post('/api/login')
+                        .then((response) => {
+                            const token = response.data.access_token
+                            localStorage.setItem('access_token', token)
+                            // console.log(response);
+                            this.$router.push('/');
+                        })
+
+                        .catch((error) => {
+                            this.$toasted.error('Ooops! Something went wrong', {
+                                icon: "warning",
+                                theme: "bubble",
+                                closeOnSwipe: true,
+                                position: "top-right",
+                                duration: 5000,
+                                singleton: true,
+                            })
+                        });
+                },
+
+            }
+        })
     </script>
 </body>
 
