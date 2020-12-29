@@ -205,8 +205,8 @@
 
                         var myHeaders = new Headers();
                         // myHeaders.append("Cookie", "__cfduid=d21ca664d247261671437bc46adc106d01608896722");
-                        let login = 'grulog23@gmail.com';
-                        let password = 'Gfirst04091990.';
+                        let login = 'admin@gmail.com';
+                        let password = '123456';
 
                         var formdata = new FormData();
                         formdata.append("email", login);

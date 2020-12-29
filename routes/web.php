@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\User\UserMainController;
+use App\Http\Controllers\User\RoleController;
+use App\Http\Controllers\User\UserController;
 
 
 /*
@@ -20,13 +22,16 @@ Route::get('/', [UserMainController::class, 'userType'])->defaults('_config', ['
 Route::post('/', [UserMainController::class, 'userType'])->defaults('_config', ['view' => 'welcome', 'redirect' => 'login'])->name('user.type');
 
 
+// Auth::routes();
 /*
 |--------------------------------------------------------------------------
 | User Auth Proteced routes
 |--------------------------------------------------------------------------
 |
 */
-Route::group(['middleware' => 'auth.user'], function () {
+Route::group(['middleware' => ['auth']], function() {
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
 });
 
 

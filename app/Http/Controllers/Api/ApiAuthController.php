@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
-class UserController extends Controller
+class ApiAuthController extends Controller
 {
     //
     public $successStatus = 200;

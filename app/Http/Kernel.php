@@ -65,6 +65,10 @@ class Kernel extends HttpKernel
 
         'ajax' => \App\Http\Middleware\Ajax::class,
         'auth.user' => \App\Http\Middleware\UserAuth::class,
-        'cors' => \App\Http\Middleware\Cors::class, 
+        'cors' => \App\Http\Middleware\Cors::class,
+
+        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
     ];
 }

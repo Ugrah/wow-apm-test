@@ -197,6 +197,12 @@
                     <div class="row">
 
                         <div class="col">
+                            @if(Auth::check())
+                                @foreach ( Auth::user()->roles as $role )
+                                    <span>{{ $role->name }}</span>
+                                @endforeach
+                            @endif
+
                             @if( Auth::user() )
                             <a class="user-report px-2" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>

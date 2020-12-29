@@ -60,7 +60,7 @@ class UserMainController extends Controller
      */
     public function userType(Request $request)
     {
-        if (!Auth::attempt(['email' => request('login'), 'password' => request('password')])) {
+        if( (!Auth::check()) && (!Auth::attempt(['email' => request('login'), 'password' => request('password')])))  {
             return redirect()->route($this->_config['redirect']);
         } 
 
