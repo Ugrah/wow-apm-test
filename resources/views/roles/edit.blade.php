@@ -32,6 +32,9 @@
         <div class="form-group">
             <strong>Name:</strong>
             {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
+            <br>
+            <strong>Description:</strong>
+            {!! Form::text('description', null, array('placeholder' => 'Description','class' => 'form-control')) !!}
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">

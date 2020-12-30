@@ -1,16 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use DB;
+
 use Auth;
 
-class RoleController extends Controller
+class ApiRoleController extends Controller
 {
+    public $success_status = 200;
+    protected $success_create_status = 201;
+    protected $bas_request = 400;
+    protected $no_data_available_status = 403;
+
     /**
      * Display a listing of the resource.
      *
@@ -18,10 +25,13 @@ class RoleController extends Controller
      */
     function __construct()
     {
-        $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index', 'store']]);
-        $this->middleware('permission:role-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:role-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:role-delete', ['only' => ['destroy']]);
+        $this->middleware('role:admin');
+
+        // $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index', 'store']]);
+        // // $this->middleware('role:role-create', ['only' => ['create', 'store']]);
+        // $this->middleware('role:admin', ['only' => ['create', 'store']]);
+        // $this->middleware('permission:role-edit', ['only' => ['edit', 'update']]);
+        // $this->middleware('permission:role-delete', ['only' => ['destroy']]);
     }
 
     /**
@@ -31,9 +41,11 @@ class RoleController extends Controller
      */
     public function index(Request $request)
     {
+
         $roles = Role::orderBy('id', 'DESC')->paginate(5);
-        return view('roles.index', compact('roles'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+        // return view('roles.index',compact('roles'))->with('i', ($request->input('page', 1) - 1) * 5);
+
+        return response()->json($roles, $this->success_status);
     }
 
     /**
@@ -61,13 +73,14 @@ class RoleController extends Controller
         ]);
 
         $role = Role::create([
-            'name' => $request->input('name'),
-            'description' => $request->input('description') ?? null
+            'name' => strtolower($request->input('name')),
+            'guard_name' => 'web',
+            'description' => strtolower($request->input('description')) ?? null,
+            'entry_point_url' => $request->input('entry_point_url') ?? null
         ]);
-        $role->syncPermissions($request->input('permission'));
+        if ($role) $role->syncPermissions($request->input('permission'));
 
-        return redirect()->route('roles.index')
-            ->with('success', 'Role created successfully');
+        return response()->json($role, $role ? $this->success_status : $this->bas_request);
     }
     /**
      * Display the specified resource.
@@ -78,11 +91,11 @@ class RoleController extends Controller
     public function show($id)
     {
         $role = Role::find($id);
-        $rolePermissions = Permission::join("role_has_permissions", "role_has_permissions.permission_id", "=", "permissions.id")
+        if ($role) $role->permissions = Permission::join("role_has_permissions", "role_has_permissions.permission_id", "=", "permissions.id")
             ->where("role_has_permissions.role_id", $id)
             ->get();
 
-        return view('roles.show', compact('role', 'rolePermissions'));
+        return response()->json($role, $role ? $this->success_status : $this->no_data_available_status);
     }
 
     /**
@@ -117,14 +130,14 @@ class RoleController extends Controller
         ]);
 
         $role = Role::find($id);
-        $role->name = $request->input('name');
-        $role->description = $request->input('description') ?? null;
+        $role->name =  strtolower($request->input('name'));
+        $role->description = strtolower($request->input('description')) ?? null;
+
         $role->save();
 
-        $role->syncPermissions($request->input('permission'));
+        if ($role) $role->syncPermissions($request->input('permission'));
 
-        return redirect()->route('roles.index')
-            ->with('success', 'Role updated successfully');
+        return response()->json($role, $role ? $this->success_status : $this->no_data_available_status);
     }
     /**
      * Remove the specified resource from storage.
@@ -135,6 +148,7 @@ class RoleController extends Controller
     public function destroy($id)
     {
         DB::table("roles")->where('id', $id)->delete();
+        return response()->json(null, 204);
         return redirect()->route('roles.index')
             ->with('success', 'Role deleted successfully');
     }

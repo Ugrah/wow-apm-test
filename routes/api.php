@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 // use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ApiAuthController;
+use App\Http\Controllers\Api\ApiRoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,15 @@ Route::group(['middleware' => 'cors'], function () {
 
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('user', [ApiAuthController::class, 'user'])->name('api.user');
+
+        // Api Roles Routes
+        Route::get('roles', [ApiRoleController::class, 'index'])->name('api.roles.index');
+        Route::get('roles/{id}', [ApiRoleController::class, 'show'])->name('api.roles.show');
+        Route::post('roles', [ApiRoleController::class, 'store'])->name('api.roles.store');
+        Route::put('roles/{id}', [ApiRoleController::class, 'update'])->name('api.roles.update');
+        Route::patch('roles/{id}', [ApiRoleController::class, 'update'])->name('api.roles.update');
+        Route::delete('roles/{id}', [ApiRoleController::class, 'destroy'])->name('api.roles.destroy');
+
     });
 });
 

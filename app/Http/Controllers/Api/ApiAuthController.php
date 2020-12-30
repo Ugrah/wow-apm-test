@@ -21,7 +21,8 @@ class ApiAuthController extends Controller
      */
     public function login()
     {
-        if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
+        $credentials = ['email' => request('email'), 'password' => request('password')];
+        if (Auth::attempt($credentials)) {
             $user = Auth::user();
             $success['token'] =  $user->createToken('MyApp')->accessToken;
             return response()->json(['success' => $success], $this->successStatus);
@@ -59,7 +60,9 @@ class ApiAuthController extends Controller
      */
     public function user(Request $request)
     {
-        return $request->user();
+        // return $request->user();
+        return response()->json(['success' => true, 'data' => $request->user()], $this->successStatusCreate);
+
         /*$user = Auth::user();
         return response()->json(['success' => $user], $this->successStatus);*/
     }
