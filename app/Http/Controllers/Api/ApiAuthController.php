@@ -23,6 +23,8 @@ class ApiAuthController extends Controller
     {
         $credentials = ['email' => request('email'), 'password' => request('password')];
         if (Auth::attempt($credentials)) {
+            // Auth::guard('web')->check($credentials);
+            // auth()->guard('web')->attempt(request(['email', 'password']));
             $user = Auth::user();
             $success['token'] =  $user->createToken('MyApp')->accessToken;
             return response()->json(['success' => $success], $this->successStatus);

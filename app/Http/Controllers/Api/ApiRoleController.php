@@ -13,7 +13,7 @@ use Auth;
 
 class ApiRoleController extends Controller
 {
-    public $success_status = 200;
+    protected $success_status = 200;
     protected $success_create_status = 201;
     protected $bas_request = 400;
     protected $no_data_available_status = 403;
@@ -41,10 +41,7 @@ class ApiRoleController extends Controller
      */
     public function index(Request $request)
     {
-
         $roles = Role::orderBy('id', 'DESC')->paginate(5);
-        // return view('roles.index',compact('roles'))->with('i', ($request->input('page', 1) - 1) * 5);
-
         return response()->json($roles, $this->success_status);
     }
 
@@ -82,6 +79,7 @@ class ApiRoleController extends Controller
 
         return response()->json($role, $role ? $this->success_status : $this->bas_request);
     }
+
     /**
      * Display the specified resource.
      *
@@ -130,12 +128,15 @@ class ApiRoleController extends Controller
         ]);
 
         $role = Role::find($id);
-        $role->name =  strtolower($request->input('name'));
-        $role->description = strtolower($request->input('description')) ?? null;
 
-        $role->save();
+        if ($role) {
+            $role->name =  strtolower($request->input('name'));
+            $role->description = strtolower($request->input('description')) ?? null;
 
-        if ($role) $role->syncPermissions($request->input('permission'));
+            $role->save();
+
+            $role->syncPermissions($request->input('permission'));
+        }
 
         return response()->json($role, $role ? $this->success_status : $this->no_data_available_status);
     }
@@ -149,7 +150,5 @@ class ApiRoleController extends Controller
     {
         DB::table("roles")->where('id', $id)->delete();
         return response()->json(null, 204);
-        return redirect()->route('roles.index')
-            ->with('success', 'Role deleted successfully');
     }
 }

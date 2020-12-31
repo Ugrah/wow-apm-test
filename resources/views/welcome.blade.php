@@ -42,19 +42,13 @@
                     <div class="row">
 
                         <div class="col">
-                            @if(Auth::check())
-                            @foreach ( Auth::user()->roles as $role )
-                            <span>{{ $role->name }}</span>
-                            @endforeach
-                            @endif
-
                             @if( Auth::user() )
                             <a class="user-report px-2" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
                             @else
                             User not connexted
                             @endif
-                            
+
                             <h3 class="mb-3 text-center text-default">You are here</h3>
                             <div id="terminals-loader" class="text-center">
                                 <button class="btn btn-primary" type="button" disabled="">
@@ -119,97 +113,22 @@
             </div>
         </div>
 
+        @foreach ( Auth::user()->roles as $role )
         <div class="col-12 col-md-6">
             <div class="card  border-0 shadow-light mb-4">
                 <div class="card-body position-relative">
                     <div class="row">
                         <div class="col">
-                            <a href="#" class="user-action" data-url="_ps/" data-type="employee">
-                                <h6 class="mb-1">Login as employee</h6>
-                                <p class="small text-mute">Work in progress</p>
+                            <a href="{{ $role->entry_point_url }}">
+                                <h6 class="mb-1">{{ ucfirst($role->name) }}</h6>
+                                <p class="small text-mute">{{ $role->description }}</p>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="col-12 col-md-6">
-            <div class="card  border-0 shadow-light mb-4">
-                <div class="card-body position-relative">
-                    <div class="row">
-                        <div class="col">
-                            <!-- <a class="disabled text-light" href="#" onclick="return false;"> -->
-                            <a href="#" class="user-action" data-url="./dashboard_.php" data-type="manager">
-                                <h6 class="mb-1">Login as a Manager </h6>
-                                <p class="small text-mute">Work in progress</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- <div class="col-12 col-md-6">
-                    <div class="card  border-0 shadow-light  bg-grey mb-4">
-                        <div class="card-body position-relative">
-                            <div class="row">
-                                <div class="col">
-                                    <a class="disabled text-light" href="#" onclick="return false;">
-                                        <h6 class="mb-1">Login as Team Leader </h6>
-                                        <p class="small text-mute">Work in progress</p>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-
-        <div class="col-12 col-md-6">
-            <div class="card  border-0 shadow-light mb-4">
-                <div class="card-body position-relative">
-                    <div class="row">
-                        <div class="col">
-                            <a href="#" class="user-action" data-url="_coach/" data-type="coach">
-                                <h6 class="mb-1">Wow Coach</h6>
-                                <p class="small text-mute">Click to proceed</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-12 col-md-6">
-            <div class="card  border-0 shadow-light mb-4">
-                <div class="card-body position-relative">
-                    <div class="row">
-                        <div class="col">
-                            <a href="#" class="user-action" data-url="_ps/" data-type="trainer">
-                                <h6 class="mb-1">Login as a Trainer </h6>
-                                <p class="small text-mute">Click to proceed</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-12 col-md-6">
-            <div class="card  border-0 shadow-light mb-4">
-                <div class="card-body position-relative">
-                    <div class="row">
-                        <div class="col">
-                            <!-- <a class="" href="./_ps/training_plan.php"> -->
-                            <a href="#" class="user-action" data-url="_ps/" data-type="trainee">
-                                <h6 class="mb-1">Login as a Trainee </h6>
-                                <p class="small text-mute">Click to proceed</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 </div>
 

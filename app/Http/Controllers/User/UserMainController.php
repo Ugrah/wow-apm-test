@@ -37,13 +37,13 @@ class UserMainController extends Controller
      */
     public function login()
     {
-    //    if(true) return redirect()->route($this->_config['redirect']);
-         
+        //    if(true) return redirect()->route($this->_config['redirect']);
+
         // Cookie::queue(Cookie::forget('api_token'));
         return view($this->_config['view']);
     }
 
-     /** 
+    /** 
      * login 
      * 
      * @return \Illuminate\Http\Response 
@@ -61,11 +61,12 @@ class UserMainController extends Controller
     public function userType(Request $request)
     {
         if( (!Auth::check()) && (!Auth::attempt(['email' => request('login'), 'password' => request('password')])))  {
+        // if (!Auth::check()) {
             return redirect()->route($this->_config['redirect']);
-        } 
+        }
 
         $api_token = $request->input('api_token');
-        if($api_token) session()->put('api_token', $api_token);
+        if ($api_token) session()->put('api_token', $api_token);
 
         return view($this->_config['view']);
     }

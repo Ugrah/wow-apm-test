@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 // use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ApiAuthController;
+use App\Http\Controllers\Api\ApiUserController;
 use App\Http\Controllers\Api\ApiRoleController;
 
 /*
@@ -27,6 +28,14 @@ Route::group(['middleware' => 'cors'], function () {
 
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('user', [ApiAuthController::class, 'user'])->name('api.user');
+
+        // Api Users Routes
+        Route::get('users', [ApiUserController::class, 'index'])->name('api.users.index');
+        Route::get('users/{id}', [ApiUserController::class, 'show'])->name('api.users.show');
+        Route::post('users', [ApiUserController::class, 'store'])->name('api.users.store');
+        Route::put('users/{id}', [ApiUserController::class, 'update'])->name('api.users.update');
+        Route::patch('users/{id}', [ApiUserController::class, 'update'])->name('api.users.update');
+        Route::delete('users/{id}', [ApiUserController::class, 'destroy'])->name('api.users.destroy');
 
         // Api Roles Routes
         Route::get('roles', [ApiRoleController::class, 'index'])->name('api.roles.index');

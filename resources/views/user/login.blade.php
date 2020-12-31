@@ -28,6 +28,8 @@
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/style-orange.css') }}" rel="stylesheet" id="style">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css" integrity="sha512-wJgJNTBBkLit7ymC6vvzM1EcSWeM9mmOu+1USHaRBbHkm6W9EgM0HY27+UtUaprntaYQJF75rc8gjxllKs5OIQ==" crossorigin="anonymous" />
 </head>
 
 <body class="ui-rounded">
@@ -47,9 +49,9 @@
     <!-- Page laoder ends -->
 
     @if( Auth::user() )
-        User connexted
+    User connexted
     @else
-        User not connexted
+    User not connexted
     @endif
 
     <!-- Begin page content -->
@@ -75,7 +77,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="inputPassword" class="sr-only">Password</label>
-                                <input type="password" id="inputPassword" name="password" class="form-control form-control-lg border-0" placeholder="Password" required="">
+                                <input type="password" id="password" name="password" class="form-control form-control-lg border-0" placeholder="Password" required="">
                             </div>
 
                             <div class="my-3 row">
@@ -131,6 +133,8 @@
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap-4.4.1/js/bootstrap.min.js') }}"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js" integrity="sha512-zlWWyZq71UMApAjih4WkaRpikgY9Bz1oXIW5G0fED4vk14JjGlQ1UmkGM392jEULP8jbNMiwLWdM8Z87Hu88Fw==" crossorigin="anonymous"></script>
+
     <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
 
     <!-- cookie css -->
@@ -146,6 +150,7 @@
     <!-- Sidebar  -->
     <script src="{{ asset('js/main_sw/main_sw.js') }}"></script>
     <!-- <script src="{{ asset('js/main_sw/category.js') }}"></script> -->
+
 
     <script>
         "use strict"
@@ -205,8 +210,8 @@
 
                         var myHeaders = new Headers();
                         // myHeaders.append("Cookie", "__cfduid=d21ca664d247261671437bc46adc106d01608896722");
-                        let login = 'admin@gmail.com';
-                        let password = '123456';
+                        let login = $('input#login').val();
+                        let password = $('input#password').val();
 
                         var formdata = new FormData();
                         formdata.append("email", login);
@@ -243,7 +248,15 @@
                                     form.submit();
                                 }
                             })
-                            .catch(error => console.log('error', error));
+                            .catch(error => {
+                                $.toast({
+                                    heading: 'Error',
+                                    text: 'Connexion error',
+                                    showHideTransition: 'fase',
+                                    icon: 'error',
+                                    loader: false
+                                })
+                            });
                     }
                 })
             }
