@@ -50,13 +50,13 @@
                             @endif
 
                             <h3 class="mb-3 text-center text-default">You are here</h3>
-                            <div id="terminals-loader" class="text-center">
+                            <div id="terminals-loader" class="text-center d-none">
                                 <button class="btn btn-primary" type="button" disabled="">
                                     <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                                     Loading...
                                 </button>
                             </div>
-                            <select id="terminals" class="selectpicker" data-style="form-control">
+                            <select id="terminals" data-style="form-control">
                                 <!-- <option>AE004L-01 - KTS-Dubai Office</option>
                                         <option>AO008L-01 - Luanda Terminal</option>
                                         <option>AO008L-02 - Namibe Terminal </option>
@@ -132,35 +132,83 @@
     </div>
 </div>
 
-<script>
-    function getMeta(metaName) {
-        const metas = document.getElementsByTagName('meta');
+@endsection
 
-        for (let i = 0; i < metas.length; i++) {
-            if (metas[i].getAttribute('name') === metaName) {
-                return metas[i].getAttribute('content');
+@section('script')
+<script>
+    $(document).ready(function() {
+
+        function getMeta(metaName) {
+            const metas = document.getElementsByTagName('meta');
+            // console.log(metas);
+
+            for (let i = 0; i < metas.length; i++) {
+                if (metas[i].getAttribute('name') === metaName) {
+                    return metas[i].getAttribute('content');
+                }
             }
+
+            return '';
         }
 
-        return '';
-    }
+        const _apiTokenCookie = getMeta('api_token');
 
-    const _apiTokenCookie = getMeta('api_token');
+        let myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${_apiTokenCookie}`);
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+        myHeaders.append("Accept", "application/json");
 
-    let myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${_apiTokenCookie}`);
-    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-    myHeaders.append("Accept", "application/json");
+        let requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
 
-    let requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow'
-    };
+        fetch("{{ env('API_BASE_URL') }}/api/user", requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                // console.log(result);
+            })
+            .catch(error => console.log('error', error));
 
-    fetch("{{ env('API_BASE_URL') }}/api/user", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+
+
+
+        function getAndSetTerminals(parentNoeudId) {
+            $('#terminals-loader').removeClass('d-none');
+            const parent = document.getElementsByTagName(parentNoeudId);
+
+            var myHeaders = new Headers();
+            myHeaders.append("Authorization", `Bearer ${_apiTokenCookie}`);
+            myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+            myHeaders.append("Accept", "application/json");
+
+            var requestOptions = {
+                method: 'GET',
+                headers: myHeaders,
+                redirect: 'follow'
+            };
+
+            fetch("http://localhost:8000/api/terminals-all", requestOptions)
+                .then(response => response.text())
+                .then(result => {
+                    // console.log(result);
+                    $('#terminals-loader').addClass('d-none');
+                    $('select#terminals').html('');
+                    result = JSON.parse(result);
+                    if (result.length > 0) {
+                        result.forEach((item) => {
+                            let code = item.code;
+                            while (code.toString().length < 2) code = `0${code}`;
+                            $('select#terminals').append($(`<option value="${item.id}">${item.matricule}-${code} - ${item.name}</option>`));
+                        });
+                    }
+                })
+                .catch(error => console.log('error', error));
+
+        }
+
+        getAndSetTerminals('terminals');
+    });
 </script>
 @endsection

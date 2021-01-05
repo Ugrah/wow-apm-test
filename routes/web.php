@@ -32,6 +32,8 @@ Route::post('/', [UserMainController::class, 'userType'])->defaults('_config', [
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
+
+    Route::get('dashboard', [UserMainController::class, 'dashboard'])->defaults('_config', ['view' => 'user.dashboard'])->name('user.dashboard');
 });
 
 

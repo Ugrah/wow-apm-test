@@ -93,6 +93,19 @@
                 pagination: false,
             });
 
+            function getMeta(metaName) {
+                const metas = document.getElementsByTagName('meta');
+                console.log(metas);
+
+                for (let i = 0; i < metas.length; i++) {
+                    if (metas[i].getAttribute('name') === metaName) {
+                        return metas[i].getAttribute('content');
+                    }
+                }
+
+                return '';
+            }
+
             if ($("#login-form").length > 0) {
                 $("#login-form").validate({
                     rules: {
@@ -181,6 +194,7 @@
             }
         });
     </script>
+    @yield('script')
 </body>
 
 </html>

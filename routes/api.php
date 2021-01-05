@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ApiAuthController;
 use App\Http\Controllers\Api\ApiUserController;
+use App\Http\Controllers\Api\ApiTerminalController;
 use App\Http\Controllers\Api\ApiRoleController;
 
 /*
@@ -36,6 +37,15 @@ Route::group(['middleware' => 'cors'], function () {
         Route::put('users/{id}', [ApiUserController::class, 'update'])->name('api.users.update');
         Route::patch('users/{id}', [ApiUserController::class, 'update'])->name('api.users.update');
         Route::delete('users/{id}', [ApiUserController::class, 'destroy'])->name('api.users.destroy');
+
+        // Api Terminals Routes
+        Route::get('terminals-all', [ApiTerminalController::class, 'getAll'])->name('api.terminals.all');
+        Route::get('terminals', [ApiTerminalController::class, 'index'])->name('api.terminals.index');
+        Route::get('terminals/{id}', [ApiTerminalController::class, 'show'])->name('api.terminals.show');
+        Route::post('terminals', [ApiTerminalController::class, 'store'])->name('api.terminals.store');
+        Route::put('terminals/{id}', [ApiTerminalController::class, 'update'])->name('api.terminals.update');
+        Route::patch('terminals/{id}', [ApiTerminalController::class, 'update'])->name('api.terminals.update');
+        Route::delete('terminals/{id}', [ApiTerminalController::class, 'destroy'])->name('api.terminals.destroy');
 
         // Api Roles Routes
         Route::get('roles', [ApiRoleController::class, 'index'])->name('api.roles.index');

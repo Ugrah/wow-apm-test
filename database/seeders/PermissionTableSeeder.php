@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
+use DB;
 
 class PermissionTableSeeder extends Seeder
 {
@@ -14,6 +15,9 @@ class PermissionTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('permissions')->delete();
+        DB::table('roles')->delete();
+
         $permissions = [
             'user-list',
             'user-create',
@@ -24,10 +28,20 @@ class PermissionTableSeeder extends Seeder
             'role-create',
             'role-edit',
             'role-delete',
+
             //    'product-list',
             //    'product-create',
             //    'product-edit',
             //    'product-delete'
+
+            'terminal-list',
+            'terminal-create',
+            'terminal-edit',
+            'terminal-delete',
+        ];
+
+        $roles = [
+            
         ];
 
         foreach ($permissions as $permission) {

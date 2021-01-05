@@ -25,7 +25,7 @@ class ApiRoleController extends Controller
      */
     function __construct()
     {
-        $this->middleware('role:admin');
+        $this->middleware(['role:admin'], ['except' => []]);
 
         // $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index', 'store']]);
         // // $this->middleware('role:role-create', ['only' => ['create', 'store']]);
@@ -42,7 +42,7 @@ class ApiRoleController extends Controller
     public function index(Request $request)
     {
         $roles = Role::orderBy('id', 'DESC')->paginate(5);
-        return response()->json($roles, $this->success_status);
+        return response()->json($roles, $roles ? $this->success_status : $this->no_data_available_status);
     }
 
     /**

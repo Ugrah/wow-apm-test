@@ -25,7 +25,7 @@ class ApiUserController extends Controller
      */
     function __construct()
     {
-        $this->middleware('role:admin');
+        $this->middleware(['role:admin'], ['except' => []]);
 
         // $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index', 'store']]);
         // // $this->middleware('role:role-create', ['only' => ['create', 'store']]);
@@ -41,8 +41,8 @@ class ApiUserController extends Controller
      */
     public function index(Request $request)
     {
-        $user = User::orderBy('id', 'DESC')->paginate(5);
-        return response()->json($user, $this->success_status);
+        $users = User::orderBy('id', 'DESC')->paginate(5);
+        return response()->json($users, $users ? $this->success_status : $this->no_data_available_status);
     }
 
     /**

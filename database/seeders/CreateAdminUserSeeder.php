@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use DB;
 
 class CreateAdminUserSeeder extends Seeder
 {
@@ -16,6 +17,8 @@ class CreateAdminUserSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('users')->delete();
+
         $user = User::create([
             'name' => 'Grulog Dev', 
             'email' => 'admin@gmail.com',

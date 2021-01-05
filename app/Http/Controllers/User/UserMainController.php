@@ -71,6 +71,16 @@ class UserMainController extends Controller
         return view($this->_config['view']);
     }
 
+    /** 
+     * login 
+     * 
+     * @return \Illuminate\Http\Response 
+     */
+    public function dashboard()
+    {
+        return view($this->_config['view']);
+    }
+
     /**
      * Destroy session.
      *
