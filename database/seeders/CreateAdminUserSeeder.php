@@ -20,12 +20,15 @@ class CreateAdminUserSeeder extends Seeder
         DB::table('users')->delete();
 
         $user = User::create([
-            'name' => 'Grulog Dev', 
+            'firstname' => 'User', 
+            'lastname' => 'Admin', 
+            'username' => 'ADMIN', 
+            'unique_id' => 'ADMIN', 
             'email' => 'admin@gmail.com',
             'password' => bcrypt('123456')
         ]);
     
-        $role = Role::create(['name' => 'Admin', 'description' => 'This is role description']);
+        $role = Role::create(['name' => 'admin', 'description' => 'Admin role']);
      
         $permissions = Permission::pluck('id','id')->all();
    

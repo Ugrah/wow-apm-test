@@ -54,7 +54,10 @@ class ApiUserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'username' => 'required|string|unique:users,username',
+            'unique_id' => 'required|unique:users,unique_id',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
             'roles' => 'required'
@@ -63,8 +66,10 @@ class ApiUserController extends Controller
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
 
+        // return response()->json($input, $input ? $this->success_status : $this->bas_request);
+
         $user = User::create($input);
-        $user->assignRole($request->input('roles'));
+        if($user) $user->assignRole($request->input('roles'));
 
         return response()->json($user, $user ? $this->success_status : $this->bas_request);
     }
@@ -92,9 +97,17 @@ class ApiUserController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required',
+            // 'name' => 'required',
+            // 'email' => 'required|email|unique:users,email,'.$id,
+            // 'password' => 'same:confirm-password',
+            // 'roles' => 'required'
+
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'username' => 'required|string|unique:users,username,'.$id,
+            'unique_id' => 'required|unique:users,unique_id,'.$id,
             'email' => 'required|email|unique:users,email,'.$id,
-            'password' => 'same:confirm-password',
+            'password' => 'required|same:confirm-password',
             'roles' => 'required'
         ]);
     
