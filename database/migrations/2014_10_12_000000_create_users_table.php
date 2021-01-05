@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
 
-            
+
             $table->string('username')->unique();
             $table->string('unique_id')->unique();
 
@@ -39,8 +39,8 @@ class CreateUsersTable extends Migration
             // $table->foreign('manager_id')
             //     ->references('id')
             //     ->on('users')
-            //     ->onDelete('cascade')
-            //     ->onUpdate('cascade');
+            //     ->onDelete('restrict')
+            //     ->onUpdate('restrict');
 
             $table->bigInteger('terminal_id')->nullable()->unsigned();
             $table->foreign('terminal_id')

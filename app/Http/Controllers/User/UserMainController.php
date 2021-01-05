@@ -60,8 +60,8 @@ class UserMainController extends Controller
      */
     public function userType(Request $request)
     {
-        if( (!Auth::check()) && (!Auth::attempt(['email' => request('login'), 'password' => request('password')])))  {
-        // if (!Auth::check()) {
+        if ((!Auth::check()) && (!Auth::attempt(['email' => request('login'), 'password' => request('password')]))) {
+            // if (!Auth::check()) {
             return redirect()->route($this->_config['redirect']);
         }
 
@@ -80,6 +80,85 @@ class UserMainController extends Controller
     {
         return view($this->_config['view']);
     }
+
+
+    // Must be correctly comment
+    public function test()
+    {
+        return view($this->_config['view']);
+    }
+
+    public function standardWork()
+    {
+        return view($this->_config['view']);
+    }
+
+    public function safetyWalk()
+    {
+        return view($this->_config['view']);
+    }
+    public function touchPoint()
+    {
+        return view($this->_config['view']);
+    }
+    public function mavim()
+    {
+        return view($this->_config['view']);
+    }
+    public function behaviorConfirmation()
+    {
+        return view($this->_config['view']);
+    }
+    public function performanceMngt()
+    {
+        return view($this->_config['view']);
+    }
+    public function terminalPerf()
+    {
+        return view($this->_config['view']);
+    }
+    public function equipmentPerf()
+    {
+        return view($this->_config['view']);
+    }
+    public function technicalPerf()
+    {
+        return view($this->_config['view']);
+    }
+    public function peopleAndSkills()
+    {
+        return view($this->_config['view']);
+    }
+    public function registerForTraining()
+    {
+        return view($this->_config['view']);
+    }
+    public function validateTraining()
+    {
+        return view($this->_config['view']);
+    }
+    public function skillMatrix()
+    {
+        return view($this->_config['view']);
+    }
+    public function experts()
+    {
+        return view($this->_config['view']);
+    }
+
+    public function trainingAgenda()
+    {
+        return view($this->_config['view']);
+    }
+    public function addTraining()
+    {
+        return view($this->_config['view']);
+    }
+    public function trainingProgress()
+    {
+        return view($this->_config['view']);
+    }
+
 
     /**
      * Destroy session.

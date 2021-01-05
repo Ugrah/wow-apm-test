@@ -29,11 +29,30 @@ Route::post('/', [UserMainController::class, 'userType'])->defaults('_config', [
 |--------------------------------------------------------------------------
 |
 */
-Route::group(['middleware' => ['auth']], function() {
+Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
 
     Route::get('dashboard', [UserMainController::class, 'dashboard'])->defaults('_config', ['view' => 'user.dashboard'])->name('user.dashboard');
+
+    Route::get('standard-work', [UserMainController::class, 'standardWork'])->defaults('_config', ['view' => 'user.standardWork'])->name('user.standardWork');
+    Route::get('test', [UserMainController::class, 'test'])->defaults('_config', ['view' => 'user.test'])->name('user.test');
+    Route::get('standard-work/safety-walk', [UserMainController::class, 'safetyWalk'])->defaults('_config', ['view' => 'user.safetyWalk'])->name('user.safetyWalk');
+    Route::get('standard-work/touch-point', [UserMainController::class, 'touchPoint'])->defaults('_config', ['view' => 'user.touchPoint'])->name('user.touchPoint');
+    Route::get('process-design-mngt/mavim', [UserMainController::class, 'mavim'])->defaults('_config', ['view' => 'user.mavim'])->name('user.mavim');
+    Route::get('standard-work/behavior-confirmation', [UserMainController::class, 'behaviorConfirmation'])->defaults('_config', ['view' => 'user.behaviorConfirmation'])->name('user.behaviorConfirmation');
+    Route::get('performance-mngt', [UserMainController::class, 'performanceMngt'])->defaults('_config', ['view' => 'user.performanceMngt'])->name('user.performanceMngt');
+    Route::get('performance-mngt/terminal-perf', [UserMainController::class, 'terminalPerf'])->defaults('_config', ['view' => 'user.terminalPerf'])->name('user.terminalPerf');
+    Route::get('performance-mngt/equipment-perf', [UserMainController::class, 'equipmentPerf'])->defaults('_config', ['view' => 'user.equipmentPerf'])->name('user.equipmentPerf');
+    Route::get('performance-mngt/technical-perf', [UserMainController::class, 'technicalPerf'])->defaults('_config', ['view' => 'user.technicalPerf'])->name('user.technicalPerf');
+    Route::get('people-and-skills', [UserMainController::class, 'peopleAndSkills'])->defaults('_config', ['view' => 'user.peopleAndSkills.peopleAndSkills'])->name('user.peopleAndSkills.peopleAndSkills');
+    Route::get('people-and-skills/register-for-training', [UserMainController::class, 'registerForTraining'])->defaults('_config', ['view' => 'user.peopleAndSkills.registerForTraining'])->name('user.peopleAndSkills.registerForTraining');
+    Route::get('people-and-skills/validate-training', [UserMainController::class, 'validateTraining'])->defaults('_config', ['view' => 'user.peopleAndSkills.validateTraining'])->name('user.peopleAndSkills.validateTraining');
+    Route::get('people-and-skills/skill-matrix', [UserMainController::class, 'skillMatrix'])->defaults('_config', ['view' => 'user.peopleAndSkills.skillMatrix'])->name('user.peopleAndSkills.skillMatrix');
+    Route::get('people-and-skills/experts', [UserMainController::class, 'experts'])->defaults('_config', ['view' => 'user.peopleAndSkills.experts'])->name('user.peopleAndSkills.experts');
+    Route::get('people-and-skills/training-agenda', [UserMainController::class, 'trainingAgenda'])->defaults('_config', ['view' => 'user.peopleAndSkills.trainingAgenda'])->name('user.peopleAndSkills.trainingAgenda');
+    Route::get('people-and-skills/add-training', [UserMainController::class, 'addTraining'])->defaults('_config', ['view' => 'user.peopleAndSkills.addTraining'])->name('user.peopleAndSkills.addTraining   ');
+    Route::get('people-and-skills/training-progress', [UserMainController::class, 'trainingProgress'])->defaults('_config', ['view' => 'user.peopleAndSkills.trainingProgress'])->name('user.peopleAndSkills.trainingProgress');
 });
 
 
