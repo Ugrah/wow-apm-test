@@ -31,6 +31,10 @@ class User extends Authenticatable
         'unique_id',
         'email',
         'password',
+
+        'department_id',
+        'manager_id',
+        'terminal_id',
     ];
 
     /**
@@ -51,4 +55,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function department() 
+	{
+		return $this->belongsTo('App\Models\Department');
+    }
+
+    public function terminal() 
+	{
+		return $this->belongsTo('App\Models\Terminal');
+    }
 }

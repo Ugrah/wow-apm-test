@@ -4,12 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Terminal extends Model
+class Department extends Model
 {
     use HasFactory;
-    // use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -18,10 +16,8 @@ class Terminal extends Model
      */
     protected $fillable = [
         'name',
-        'matricule',
-        'code',
-        'terminal_entry_point_id',
-        'status'
+        'description',
+        'color_code',
     ];
 
     /**
@@ -39,8 +35,8 @@ class Terminal extends Model
     protected $casts = [
     ];
 
-    // public function account_type() 
-	// {
-	// 	return $this->belongsTo('App\Models\TerminalEntryPoint');
-    // }
+    public function users() 
+    {
+        return $this->hasMany('App\Models\User');
+    }
 }
