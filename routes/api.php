@@ -70,22 +70,22 @@ Route::group(['middleware' => 'cors'], function () {
         Route::delete('departments/{id}', [ApiDepartmentController::class, 'destroy'])->name('api.departments.destroy');
 
         // Api ps_skills Route
-        Route::resource('ps_skills', ApiPsSkillController::class);
-        Route::get('ps_skills-get-from-category/{category_id}', [ApiPsSkillController::class, 'getPsSkillsFromCategory'])->name('api.ps_skills.getFromCat');
-        Route::get('ps_skills-get-experts/{skill_id}', [ApiPsSkillController::class, 'getExperts'])->name('api.ps_skills.getExperts');
+        Route::resource('ps-skills', ApiPsSkillController::class);
+        Route::get('ps-skills-get-from-category/{category_id}', [ApiPsSkillController::class, 'getPsSkillsFromCategory'])->name('api.ps-skills.getFromCat');
+        Route::get('ps-skills-get-experts/{skill_id}', [ApiPsSkillController::class, 'getExperts'])->name('api.ps-skills.getExperts');
 
         // Api wow_categories Route
-        Route::resource('wow_categories', ApiWowCategoryController::class);
-        Route::get('wow_categories-sidebar-menu', [ApiWowCategoryController::class, 'sideMenuCategories'])->name('api.wow_categories.getMenu');
-        Route::get('wow_categories-from-name/{name}', [ApiWowCategoryController::class, 'showFromName'])->name('api.wow_categories.show.fromName');
+        Route::resource('wow-categories', ApiWowCategoryController::class);
+        Route::get('wow-categories-sidebar-menu', [ApiWowCategoryController::class, 'sideMenuCategories'])->name('api.wow-categories.getMenu');
+        Route::get('wow-categories-from-name/{name}', [ApiWowCategoryController::class, 'showFromName'])->name('api.wow-categories.show.fromName');
         
         // Api ps_training_session Route
-        Route::resource('ps_training_sessions', ApiPsTrainingSessionController::class);
+        Route::resource('ps-training-sessions', ApiPsTrainingSessionController::class);
         // Route::get('add-training-session', [ApiPsTrainingSessionController::class, 'addTrainingSession'])->name('api.ps_training_sessions.addTrainingSession');
 
 
         // Api ps_training_session_user Route
-        Route::resource('ps_training_session_users', ApiPsTrainingSessionUserController::class);
+        Route::resource('ps-training-session-users', ApiPsTrainingSessionUserController::class);
     });
 });
 

@@ -32,12 +32,12 @@ function getCategoryFromName(_apiToken, name) {
     let d = new $.Deferred();
 
     let settings = {
-        url: `/api/wow_categories-from-name/${name}`,
+        url: `/api/wow-categories-from-name/${name}`,
         method: "GET",
         timeout: 0,
         headers: {
             "Authorization": `Bearer ${_apiToken}`,
-            "Content-Type": "application/x-www-form-urlencoded",
+            // "Content-Type": "application/x-www-form-urlencoded",
             "Accept": "application/json"
         },
     };
@@ -54,12 +54,12 @@ function getPsSkillByCategory(_apiToken, category_id) {
     let d = new $.Deferred();
 
     let settings = {
-        url: `/api/ps_skills-get-from-category/${category_id}`,
+        url: `/api/ps-skills-get-from-category/${category_id}`,
         method: "GET",
         timeout: 0,
         headers: {
             "Authorization": `Bearer ${_apiToken}`,
-            "Content-Type": "application/x-www-form-urlencoded",
+            // "Content-Type": "application/x-www-form-urlencoded",
             "Accept": "application/json"
         },
     };
@@ -75,12 +75,12 @@ function getPsSkillByCategory(_apiToken, category_id) {
 function getSkillExperts(_apiToken, skill_id) {
     let d = new $.Deferred();
     let settings = {
-        url: `/api/ps_skills-get-experts/${skill_id}`,
+        url: `/api/ps-skills-get-experts/${skill_id}`,
         method: "GET",
         timeout: 0,
         headers: {
             "Authorization": `Bearer ${_apiToken}`,
-            "Content-Type": "application/x-www-form-urlencoded",
+            // "Content-Type": "application/x-www-form-urlencoded",
             "Accept": "application/json"
         },
     };
@@ -352,7 +352,7 @@ function createPsTrainingSession(_apiToken, formdata) {
     let d = new $.Deferred();
 
     var settings = {
-        url: `/api/ps_training_sessions`,
+        url: `/api/ps-training-sessions`,
         method: "POST",
         timeout: 0,
         headers: {

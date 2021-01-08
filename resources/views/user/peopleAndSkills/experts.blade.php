@@ -1,9 +1,6 @@
 @extends('layouts.user')
 
-@section('title')
-@parent
-WOW APP DASHBOARD
-@endsection
+@section('title') {{ config('app.name') }} - Experts @endsection
 
 @section('content')
 <!-- page content goes here -->
@@ -22,41 +19,7 @@ WOW APP DASHBOARD
             <hr>
             <h5 class="text-default text-center">Select category</h5>
             <div class="row">
-                <div id="categories-list" class="col-12 col-md-6">
-                    <div class="card  border-0 shadow-light mb-2">
-                        <a class="skill-cat-item " href="#" data-id="7" data-name="Process">
-                            <div class="card-body position-relative">
-                                <div class="row">
-                                    <div class="col">
-                                        <p class="text-default">Process</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card  border-0 shadow-light mb-2">
-                        <a class="skill-cat-item " href="#" data-id="8" data-name="Functional Skills">
-                            <div class="card-body position-relative">
-                                <div class="row">
-                                    <div class="col">
-                                        <p class="text-default">Functional Skills</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card  border-0 shadow-light mb-2">
-                        <a class="skill-cat-item " href="#" data-id="9" data-name="Work Instructions">
-                            <div class="card-body position-relative">
-                                <div class="row">
-                                    <div class="col">
-                                        <p class="text-default">Work Instructions</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                <div id="categories-list" class="col-12 col-md-6"></div>
             </div>
         </div>
 
@@ -89,7 +52,7 @@ WOW APP DASHBOARD
     <div class="toast-header">
         <div class="avatar avatar-20 mr-2">
             <div class="background" style="background-image: url(&quot;https://apm-wow.maxmind.ma/linkV2/assets/img/workLogo.svg&quot;);">
-                <img src="https://apm-wow.maxmind.ma/linkV2/assets/img/workLogo.svg" class="mr-2" alt="..." style="display: none;">
+                <img src="{{ asset('img/workLogo.svg') }}" class="mr-2" alt="..." style="display: none;">
             </div>
         </div>
         <strong class="mr-auto">APM Tangier</strong>
@@ -102,4 +65,229 @@ WOW APP DASHBOARD
         You have no new notification
     </div>
 </div>
+@endsection
+
+@section('script')
+<script src="{{ asset('js/ps/functions-new.js') }}"></script>
+
+<script>
+    $(document).ready(function() {
+        // Page variables
+        const _apiTokenCookie = getMeta('api_token');
+
+        let storage = {};
+        let breadcrumbItems = [
+            {name: 'Categories', currentContainer: 'categories', callback: 'initExperts', param: null},
+            {name: 'Skills', currentContainer: 'skills', callback: 'afterClicOnCategoryItem', param: null},
+            {name: 'Experts', currentContainer: 'experts', callback: 'afterClicOnSkills', param: '[storage.skill.id]'}
+        ];
+        let minAjaxDelay = 2000;
+
+        // PAGE FUNCTIONS
+        function updateBreadcrump($initParent) {
+            let breadCrumb = $initParent.parents('div.section-container').data('current-container');
+
+            let activebreadcrumb = breadcrumbItems.find(elmt => elmt.currentContainer == breadCrumb);
+            let maxBreadcrumb = breadcrumbItems.indexOf(activebreadcrumb);
+            let $breadcrumbContainer = $('ol.cd-breadcrumb');
+            $breadcrumbContainer.html('');
+            if (maxBreadcrumb == 0) {
+                $breadcrumbContainer.append($(`<li class="current"><em class="">${activebreadcrumb.name}</em></li>`))
+            } else if (maxBreadcrumb > 0) {
+                let i = 0;
+                for (i = 0; i <= maxBreadcrumb; i++) {
+                    // console.log( breadcrumbItems[i] ); return;
+                    if (i < maxBreadcrumb) {
+                        $breadcrumbContainer.append($(`<li><a href="#" class="previous-step breadcrumb-item" data-callback="${breadcrumbItems[i].callback}" data-callback-param="${breadcrumbItems[i].param ?? ''}">${breadcrumbItems[i].otherName ? breadcrumbItems[i].otherName : breadcrumbItems[i].name}</a></li>`))
+                    } else if (i == maxBreadcrumb) {
+                        $breadcrumbContainer.append($(`<li class="current"><em class="">${breadcrumbItems[i].name}</em></li>`))
+                    }
+                }
+            }
+
+            let maxLength = 7;
+            $('.breadcrumb-item').each(function() {
+                if ($(this).text().length > maxLength) $(this).text($(this).text().substring(0, (maxLength - 1)) + "...");
+            });
+        }
+
+        function initExperts($parent) {
+            if ((!$parent) || ($parent.length <= 0)) $parent = $('#categories-list');
+            if ($parent.length > 0) {
+                let loader = $(`<div class="spinner-grow text-dark" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>`);
+                $parent.addClass('justify-content-center text-center');
+                $parent.html('');
+                $parent.append(loader);
+            } else $parent = null;
+
+            $('div.section-container').hide();
+            if ($parent.length > 0) $parent.parents('div.section-container').show();
+            updateBreadcrump($parent);
+
+            $.when(
+                getCategoryFromName(_apiTokenCookie, 'training')
+            ).then((response) => {
+                if ($parent.length <= 0) return;
+                else {
+                    setTimeout(function() {
+                        if (response.children.length > 0) {
+                            $parent.html('');
+                            response.children.forEach((item) => {
+                                let $elmt = null;
+                                if (typeof createSkillCategory == "function") $elmt = createSkillCategory(item);
+                                if (($parent) && ($elmt)) $parent.append($elmt);
+                            });
+                        } else $parent.text('No data found');
+                        $parent.removeClass('justify-content-center text-center');
+                    }, minAjaxDelay);
+                }
+            });
+        }
+
+        function afterClicOnCategoryItem($parent = null) {
+            if ((!$parent) || ($parent.length <= 0)) $parent = $('#skills-list');
+            if ($parent.length > 0) {
+                let loader = $(`<div class="spinner-grow text-dark" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>`);
+                $parent.addClass('justify-content-center text-center');
+                $parent.html('');
+                $parent.append(loader);
+            } else $parent = null;
+
+
+            $('div.section-container').hide();
+            if ($parent.length > 0) $parent.parents('div.section-container').show();
+            updateBreadcrump($parent);
+
+            $.when(
+                getPsSkillByCategory(_apiTokenCookie, storage.category.id)
+            ).then((response) => {
+                if ($parent.length <= 0) return;
+                else {
+                    setTimeout(function() {
+                        if (response.length > 0) {
+                            $parent.html('');
+                            response.forEach((item) => {
+                                let $elmt = null;
+                                if (typeof createDomSkillItem == "function") $elmt = createDomSkillItem(item);
+                                if (($parent) && ($elmt)) $parent.append($elmt);
+                            });
+                        } else $parent.text('No data found');
+                        $parent.removeClass('justify-content-center text-center');
+                    }, minAjaxDelay);
+                }
+            });
+        }
+
+        function afterClicOnSkillItem(skillId, $parent = null) {
+            if ((!$parent) || ($parent.length <= 0)) $parent = $('#experts-list');
+            if ($parent.length > 0) {
+                let loader = $(`<div class="spinner-grow text-dark" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>`);
+                $parent.addClass('justify-content-center text-center');
+                $parent.html('');
+                $parent.append(loader);
+            } else $parent = null;
+
+            $('div.section-container').hide();
+            if ($parent.length > 0) $parent.parents('div.section-container').show();
+            updateBreadcrump($parent);
+
+            $.when(
+                getSkillExperts(_apiTokenCookie, skillId)
+            ).then((response) => {
+                if ($parent.length <= 0) return;
+                else {
+                    setTimeout(function() {
+                        if (response.data.length > 0) {
+                            $parent.html('');
+                            response.data.forEach((item) => {
+                                let $elmt = null;
+                                if (typeof createExpert == "function") $elmt = createExpert(item);
+                                if (($parent) && ($elmt)) $parent.append($elmt);
+                            });
+                        } else $parent.text('No data found');
+                        $parent.removeClass('justify-content-center text-center');
+                    }, minAjaxDelay);
+                }
+            });
+        }
+
+        // EVENTS
+        $('body').on('click', 'a.previous-step', function(e) {
+            e.preventDefault();
+            let callback = eval($(this).data('callback'));
+            let param = eval($(this).data('callback-param'));
+            if (typeof param === "undefined") param = null;
+            if (typeof callback == "function") callback.apply(null, param);
+        });
+
+        $('body').on('click', 'a.skill-cat-item', function(e) {
+            e.preventDefault();
+            let $section = $(this).parents('div.section-container');
+            let $nextSection = $(`#container-${$section.data('next-container')}`);
+
+            if ($nextSection.length <= 0) return;
+
+            storage.category = {
+                id: parseInt($(this).data('id')),
+                name: $(this).data('name')
+            };
+
+            $section.hide("slide", {
+                direction: "left"
+            }, 'fast');
+            $nextSection.show("slide", {
+                direction: "right"
+            }, 'fast');
+
+            let breadCrumb = $section.data('current-container');
+            let activebreadcrumb = breadcrumbItems.find(elmt => elmt.currentContainer == breadCrumb);
+            activebreadcrumb.otherName = storage.category.name;
+            activebreadcrumb.otherName = activebreadcrumb.otherName.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+                return letter.toUpperCase();
+            });
+
+            if (typeof afterClicOnCategoryItem == "function") afterClicOnCategoryItem();
+        });
+
+        $('body').on('click', 'a.skill-item:not(.disabled)', function(e) {
+            e.preventDefault();
+            let $section = $(this).parents('div.section-container');
+            let $nextSection = $(`#container-${$section.data('next-container')}`);
+
+            if ($nextSection.length <= 0) return;
+
+            storage.skill = {
+                id: parseInt($(this).data('id')),
+                name: $(this).data('name'),
+                // userLevel: parseInt($(this).data('level')) == 0 ? 1 : parseInt($(this).data('level'))
+            };
+
+            $section.hide("slide", {
+                direction: "left"
+            }, 'fast');
+            $nextSection.show("slide", {
+                direction: "right"
+            }, 'fast');
+
+            let breadCrumb = $section.data('current-container');
+            let activebreadcrumb = breadcrumbItems.find(elmt => elmt.currentContainer == breadCrumb);
+            activebreadcrumb.otherName = storage.skill.name;
+            activebreadcrumb.otherName = activebreadcrumb.otherName.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+                return letter.toUpperCase();
+            });
+
+            if (typeof afterClicOnSkillItem == "function") afterClicOnSkillItem(storage.skill.id);
+        });
+
+
+        // RUN GENERAL SCRIPT
+        initExperts($('#categories-list'));
+    });
+</script>
 @endsection

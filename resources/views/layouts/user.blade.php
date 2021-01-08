@@ -533,7 +533,7 @@
                 let d = new $.Deferred();
 
                 let settings = {
-                    "url": "{{ route('api.wow_categories.getMenu') }}",
+                    "url": "{{ route('api.wow-categories.getMenu') }}",
                     "method": "GET",
                     "timeout": 0,
                     "headers": {

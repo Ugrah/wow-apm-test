@@ -607,7 +607,6 @@
                 return;
             }
 
-            // trainingObject.week = {number: $(this).data('week-number'), year: $(this).data('year'), startWeek: $(this).data('start-week')};
             trainingObject.week = {
                 number: parseInt($(this).data('week-number')),
                 year: parseInt($(this).data('year')),
