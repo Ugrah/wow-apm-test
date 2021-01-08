@@ -27,9 +27,21 @@
     <!-- Swiper Slider -->
     <link href="{{ asset('vendor/swiper/css/swiper.min.css') }}" rel="stylesheet">
 
+    <!-- Awesome fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+
+    <!-- Timepicker css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css" integrity="sha512-eOKbnuWqH2HMqH9nXcm95KXitbj8k7P49YYzpk7J4lw1zl+h4uCjkCfV7RaY4XETtTZnNhgsa+/7x29fH6ffjg==" crossorigin="anonymous" />
+
+    <!-- Jquery UI css -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
     <!-- Custom styles for this template -->
-    <link href="{{ asset('css/style-orange.css') }}" rel="stylesheet" id="style">
+    <link href="{{ asset('css/level.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style-red.css') }}" rel="stylesheet">
     <link href="{{ asset('css/icomoon.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     <style>
         .svg__admin {
             width: 40px;
@@ -321,7 +333,6 @@
         <div class="row no-gutters">
             <div class="col-auto align-self-center">
                 <figure class="avatar avatar-50">
-                    <!-- old version page link : https://apm-wow.maxmind.ma/linkV2/profile.php -->
                     <a href="#">
                         <img src="{{ asset('img/avatar_.png') }}" alt="Sidebar  avatr profile">
 
@@ -334,11 +345,12 @@
                 <small class="text-mute">Tangier</small>
 
                 <hr>
-                <a href="#" class="user-action btn btn-custom-sibedar-type w-auto mx-1">User type</a>
+                <a href="{{ route('user.type') }}" class="btn btn-custom-sibedar-type w-auto mx-1">User type</a>
 
             </div>
             <div class="col-auto align-self-center">
-                <a href="https://apm-wow.maxmind.ma/linkV2/logout.php" class="btn btn-link text-white p-2"><i class="material-icons">power_settings_new</i></a>
+                <a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="btn btn-link text-white p-2"><i class="material-icons">power_settings_new</i></a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
             </div>
         </div>
 
@@ -362,7 +374,7 @@
         @yield('content')
 
         <!-- Footer -->
-        <div class="toast bottom-right position-fixed mb-5" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000">
+        <div class="toast bottom-right position-fixed mb-5 d-none" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000">
             <div class="toast-header">
                 <div class="avatar avatar-20 mr-2">
                     <div class="background">
@@ -435,7 +447,7 @@
         </ul>
     </div>
 
-    <script src="/v3/public/assets/formGenerator.js"></script>
+    <!-- <script src="/v3/public/assets/formGenerator.js"></script> -->
     <!-- Footer ends -->
 
 
@@ -444,6 +456,13 @@
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap-4.4.1/js/bootstrap.min.js') }}"></script>
+
+    <script type="text/javascript">
+        $.fn.bsModal = $.fn.modal.noConflict();
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw==" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous"></script>
 
     <!-- cookie css -->
     <script src="{{ asset('vendor/cookie/jquery.cookie.js') }}"></script>
@@ -458,8 +477,16 @@
     <script src="{{ asset('js/main.js') }}"></script>
 
     <!-- Sidebar  -->
-    <script src="{{ asset('js/main_sw/main_sw.js') }}"></script>
-    <script src="{{ asset('js/main_sw/category.js') }}"></script>
+    <!-- <script src="{{ asset('js/main_sw/main_sw.js') }}"></script> -->
+    <!-- <script src="{{ asset('js/main_sw/category.js') }}"></script> -->
+
+    <script src="{{ asset('js/sweetalert2.min.js') }}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js" integrity="sha512-RLw8xx+jXrPhT6aXAFiYMXhFtwZFJ0O3qJH1TwK6/F02RSdeasBTTYWJ+twHLCk9+TU8OCQOYToEeYyF/B1q2g==" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/en-gb.min.js" integrity="sha512-w+tDY4gx49+DNVlN7Nmc9ldOkh6nP3w4txBTEatSx3XrZdfYtX9+oylJjQ7RqeeDzDebG3u1VAg/gM5Td2Bd5Q==" crossorigin="anonymous"></script>
+
 
     <script>
         "use strict"
@@ -476,9 +503,10 @@
                 pagination: false,
             });
 
+            let minAjaxDelay = 2000;
+
             function getMeta(metaName) {
                 const metas = document.getElementsByTagName('meta');
-                console.log(metas);
 
                 for (let i = 0; i < metas.length; i++) {
                     if (metas[i].getAttribute('name') === metaName) {
@@ -489,28 +517,68 @@
                 return '';
             }
 
-            /* masonry js */
-            /* $('#search-tab[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+            const _apiTokenCookie = getMeta('api_token');
 
-            })*/
+            // Used - layouts.user
+            function setSkillCategorySidebar(itemData, $parent) {
+                let elmnt = $(`<a href="${itemData.url_link}" class="list-group-item list-group-item-action">
+                    <i class="material-icons">label</i>
+                    ${itemData.name}
+                </a>`);
 
-            /* toast message */
-            setTimeout(function() {
-                // $('.toast').toast('show')
-            }, 2000);
+                if ($parent) $parent.append(elmnt);
+            }
 
-            /* increasenumber */
-            $('.add').on('click', function() {
-                var current = parseInt($(this).closest('.increasenumber').find('input').val());
-                $(this).closest('.increasenumber').find('input').val(current + 1);
-            });
-            $('.remove').on('click', function() {
-                if ($(this).closest('.increasenumber').find('input').val() > 0) {
-                    var current = parseInt($(this).closest('.increasenumber').find('input').val());
-                    $(this).closest('.increasenumber').find('input').val(current - 1);
-                }
-            });
+            function getAsideMenuItems() {
+                let d = new $.Deferred();
 
+                let settings = {
+                    "url": "{{ route('api.wow_categories.getMenu') }}",
+                    "method": "GET",
+                    "timeout": 0,
+                    "headers": {
+                        "Authorization": `Bearer ${_apiTokenCookie}`,
+                        "Content-Type": "application/x-www-form-urlencoded",
+                        "Accept": "application/json"
+                    },
+                };
+
+                $.ajax(settings).done(function(response) {
+                    d.resolve(response);
+                });
+
+                return d.promise();
+            }
+
+            function setAsideCategories($parent) {
+                if ($parent.length > 0) {
+                    let loader = $(`<div class="spinner-grow text-dark" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>`);
+                    $parent.addClass('justify-content-center text-center');
+                    $parent.html('');
+                    $parent.append(loader);
+                } else $parent = null;
+
+                $.when(
+                    getAsideMenuItems()
+                ).then((response) => {
+                    if ($parent.length <= 0) return;
+                    else {
+                        setTimeout(function() {
+                            if (response.length > 0) {
+                                $parent.html('');
+                                response.forEach((item) => {
+                                    if (typeof setSkillCategorySidebar == "function") setSkillCategorySidebar(item, $parent);
+                                });
+                            } else $parent.text('No data found');
+                            $parent.removeClass('justify-content-center text-center');
+                        }, minAjaxDelay);
+                    }
+                });
+            }
+
+            setAsideCategories($('#wow-category'));
         });
     </script>
 

@@ -203,30 +203,32 @@ function getSkillCategories(category_id, $parent = null) {
 //     return d.promise();
 // }
 
-function getPsSkillByCategory(category_id, $parent = null, object = null) {
-    if( $parent.length > 0 ) {
-        let loader = $(`<div class="spinner-grow text-dark" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>`);
-        $parent.addClass('justify-content-center text-center');
-        $parent.html('');
-        $parent.append(loader);
-    } else $parent = null;
-
-    let user_id = ((object)  && (object.member) && (object.member.id)) ? object.member.id : null;
-    if((object == true) && (!user_id)) user_id = 'user'; 
-    if(object == 'trainer') user_id = 'trainer';
-    let requestUrl = `${baseAppCLink}get-ps-skill-by-category/${category_id}`;
-    if(user_id) requestUrl += `/${user_id}`;
-
+function getPsSkillByCategory(category_id) {
     let d = new $.Deferred();
-    $.ajax({
-        type: 'GET',
-        url: requestUrl,
-        success : function(response) {
-            d.resolve(response, $parent);
-        }
+    // $.ajax({
+    //     type: 'GET',
+    //     url: `/api/ps_skills-get-from-category/${category_id}`,
+    //     success : function(response) {
+    //         d.resolve(response, $parent);
+    //     }
+    // });
+    // return d.promise();
+
+    let settings = {
+        url: `/api/ps_skills-get-from-category/${category_id}`,
+        method: "GET",
+        timeout: 0,
+        headers: {
+            "Authorization": `Bearer ${_apiTokenCookie}`,
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Accept": "application/json"
+        },
+    };
+
+    $.ajax(settings).done(function(response) {
+        d.resolve(response);
     });
+
     return d.promise();
 }
 
@@ -1072,45 +1074,8 @@ function setTeamMemberForTrainer(itemData, $parent, itemClass = null, contentCla
         }
     } 
 
-    // For Test - To validate training without date restriction
-    /*
-    if ($.inArray(itemData.id, skillApprovedMembers) >= 0) trainingStatusOptions = {class: 'badge-success', text: 'Skill acuqired', acuqired: true};
-    else {
-        if ($.inArray(itemData.id, validateMembers) >= 0) {
-            forValidateButton = `<button type="button" class="btn btn-light disapproved-training" data-member-id="${itemData.id}" data-session-id="${trainingSession.id}" style="border-radius: 50px;"><img src="${baseApp}linkV2/assets/img/icons/wow/thumbs-up.png" alt="" class="card_icons_mini" style="transform: scale(1, -1);"></button>`;
-            trainingStatusOptions = {class: 'bg-default', text: 'Training approved'};
-        }
-        else {
-            forValidateButton = `<button type="button" class="btn btn-light approved-training" data-member-id="${itemData.id}" data-session-id="${trainingSession.id}" style="border-radius: 50px;"><img src="${baseApp}linkV2/assets/img/icons/wow/thumbs-up.png" alt="" class="card_icons_mini"></button>`;
-            trainingStatusOptions = {class: 'bg-info', text: 'Traning no yet approved'};
-        }
-    }
-    */
 
     trainingStatus = `<p class="small text-light badge ${trainingStatusOptions.class}">${trainingStatusOptions.text}</p>`;
-
-
-    // let trainingInProgress = false;
-    // if(($.inArray(itemData.id, members) >= 0) && ($.inArray(itemData.id, validateMembers) < 0)) trainingInProgress = true;
-
-    // let forValidateButton = null;
-    // let statusItem = null;
-
-    // // console.log(trainingSession);
-    // if(trainingInProgress) {
-    //     let training_dates = JSON.parse(trainingSession.training_dates);
-
-    //     // lastDate = moment(training_dates[training_dates.length-1].date, "DD-MM-YYYY");
-    //     lastDate = moment(`${training_dates[training_dates.length-1].date} ${training_dates[training_dates.length-1].startTime}`, "DD-MM-YYYY hh:mm A");
-
-    //     // if(lastDate.diff(moment(), 'minutes') <= 0)
-    //         forValidateButton = `<button type="button" class="btn btn-light approved-training" data-member-id="${itemData.id}" data-session-id="${trainingSession.id}" style="border-radius: 50px;"><img src="${baseApp}linkV2/assets/img/icons/wow/thumbs-up.png" alt="" class="card_icons_mini"></button>`;
-    //     statusItem = '<p class="small text-light badge badge-warning bg-warning">Training in progress</p>';
-    // } 
-    // else if ($.inArray(itemData.id, validateMembers) >= 0) {
-    //     forValidateButton = `<button type="button" class="btn btn-light disapproved-training" data-member-id="${itemData.id}" data-session-id="${trainingSession.id}" style="border-radius: 50px;"><img src="${baseApp}linkV2/assets/img/icons/wow/thumbs-up.png" alt="" class="card_icons_mini" style="transform: scale(1, -1);"></button>`;
-    //     statusItem = '<p class="small text-light badge badge-default bg-default">Approved training</p>';
-    // }
 
     var elmnt = $(`<div class="card  border-0 shadow-light mb-2">
         <a class="member-item ${itemClass ?? ''} ${contentClass ?? 'text-default'}" href="#" data-id="${itemData.id}" data-name="${itemData.user_fname} ${itemData.user_lname}">
@@ -1122,22 +1087,6 @@ function setTeamMemberForTrainer(itemData, $parent, itemClass = null, contentCla
                     </div>
                     <div class="col-auto">
                         ${forValidateButton ?? ''}
-                    </div>
-                </div>
-            </div>
-        </a>
-    </div>`);
-
-    if($parent) $parent.append(elmnt);
-}
-
-function setSkillCategory(itemData, $parent, itemClass = null) {
-    var elmnt = $(`<div class="card  border-0 shadow-light mb-2">
-        <a class="skill-cat-item ${itemClass ?? ''}" href="#" data-id="${itemData.id}" data-name="${itemData.name}">
-            <div class="card-body position-relative">
-                <div class="row">
-                    <div class="col">
-                        <p class="text-default">${itemData.name}</p>
                     </div>
                 </div>
             </div>

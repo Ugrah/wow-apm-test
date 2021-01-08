@@ -67,23 +67,13 @@ Standard work
             <div class="swiper-container swiper-categories text-center swiper-container-horizontal swiper-container-android">
                 <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
                     <div class="swiper-slide w-auto p-2 text-center swiper-slide-active">
-                        <a class="icons icon-60 " href="{{url('/sandard-work/safety-walk')}}">
-                            <img src="https://apm-wow.maxmind.ma/linkV2/assets/img/icons/wow/safety-walk-free.jpg" alt="" class="categorie_icon_title">
-                            <!-- <svg class="svg__header" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
-                    <style type="text/css">
-                        .st0{fill:#004062;}
-                    </style>
-                    <path class="st0" d="M16,6.8c-2.5,0-4.6,2.1-4.6,4.6S13.5,16,16,16s4.6-2.1,4.6-4.6C20.6,8.9,18.5,6.8,16,6.8z M16,14.2
-                        c-1.5,0-2.8-1.2-2.8-2.8s1.2-2.8,2.8-2.8s2.8,1.2,2.8,2.8C18.8,12.9,17.5,14.2,16,14.2z"/>
-                    <path class="st0" d="M16.2,1.3c-0.1,0-0.1,0-0.2,0c-5.6,0-10.1,4.5-10.1,10.1c0,7.6,5.8,16.2,7.6,18.6c0.3,0.5,0.9,0.8,1.5,0.7h2.1
-                        c0.6,0,1.1-0.3,1.5-0.7c1.3-1.7,7.6-10.8,7.6-18.6C26.2,5.9,21.7,1.3,16.2,1.3z M17.1,28.9l-2.1,0c-1.2-1.7-7.2-10.3-7.2-17.5
-                        c0-4.6,3.7-8.3,8.3-8.3c0,0,0.1,0,0.1,0c4.5,0,8.2,3.8,8.1,8.3C24.3,18.6,18.3,27.2,17.1,28.9z"/>
-                    </svg> -->
+                        <a class="icons icon-60 " href="{{ route('user.standardWork.safetyWalk') }}">
+                            <img src="{{ asset('img/icons/wow/safety-walk-free.jpg') }}" alt="" class="categorie_icon_title">
                         </a>
                         <p class="small mt-2 text-mute">Safety <br>Walk</p>
                     </div>
                     <div class="swiper-slide w-auto p-2 swiper-slide-next">
-                        <a class="icons icon-60" href="{{url('sandard-work/touch-point')}}">
+                        <a class="icons icon-60" href="{{ route('user.standardWork.touchPoint') }}">
                             <svg class="svg__header" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
                                 <style type="text/css">
                                     .st0 {
@@ -98,7 +88,7 @@ Standard work
                     </div>
                     <div class="swiper-slide w-auto p-2">
                         <!-- <a  class="icons icon-60 "> -->
-                        <a class="icons icon-60" href="https://apm-wow.maxmind.ma/linkV2/_pdm/mavim.php">
+                        <a class="icons icon-60" href="{{ route('user.processDesignMngt.mavim') }}">
                             <svg class="svg__header" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
                                 <style type="text/css">
                                     .st0 {
@@ -114,7 +104,7 @@ Standard work
                         <p class="small mt-2 text-mute">Process<br>Confirmation</p>
                     </div>
                     <div class="swiper-slide w-auto p-2">
-                        <a class="icons icon-60 " href="{{url('/standard-work/behavior-confirmation')}}">
+                        <a class="icons icon-60 " href="{{ route('user.standardWork.behaviorConfirmation') }}">
                             <svg class="svg__header" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
                                 <style type="text/css">
                                     .st0 {
@@ -339,7 +329,7 @@ Standard work
     <div class="toast-header">
         <div class="avatar avatar-20 mr-2">
             <div class="background" style="background-image: url(&quot;https://apm-wow.maxmind.ma/linkV2/assets/img/workLogo.svg&quot;);">
-                <img src="https://apm-wow.maxmind.ma/linkV2/assets/img/workLogo.svg" class="mr-2" alt="..." style="display: none;">
+                <img src="{{ asset('img/workLogo.svg') }}" class="mr-2" alt="..." style="display: none;">
             </div>
         </div>
         <strong class="mr-auto">APM Tangier</strong>

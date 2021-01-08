@@ -39,7 +39,7 @@
             <div class="col-12 align-self-start text-center"></div>
 
             <div class="logo col-12 align-self-center text-center">
-                <img src="https://apm-wow.maxmind.ma/link_/img/LOGO_WOW.png" alt="..." style="max-width: 150px" class="avatar avatar-img rounded-circle">
+                <img src="{{ asset('img/LOGO_WOW.png') }}" alt="..." style="max-width: 150px" class="avatar avatar-img rounded-circle">
             </div>
             <div class="col-12 align-self-end text-center">
                 <p class="my-5">Please wait<br><small class="text-mute">We are preparing everything in the background...</small></p>
@@ -47,12 +47,6 @@
         </div>
     </div>
     <!-- Page laoder ends -->
-
-    @if( Auth::user() )
-    User connexted
-    @else
-    User not connexted
-    @endif
 
     <!-- Begin page content -->
     <main class="flex-shrink-0 main-container">
@@ -66,7 +60,7 @@
                     @csrf
                     <div class="row h-100 h-sm-auto">
                         <div class="col-12 col-md-8 col-lg-5 col-xl-4 mx-auto align-self-center text-center">
-                            <img src="https://apm-wow.maxmind.ma/link_/img/LOGO_WOW.png" alt="..." style="max-width: 150px" class="avatar avatar-img rounded-circle">
+                            <img src="{{ asset('img/LOGO_WOW.png') }}" alt="..." style="max-width: 150px" class="avatar avatar-img rounded-circle">
                             <br>
                             <br>
                             <h3 class="font-weight-normal mb-4">Please Sign In</h3>

@@ -12,6 +12,23 @@ WOW APP DASHBOARD
     <h4 class="text-default"><img src="https://apm-wow.maxmind.ma/linkV2/assets/img/sp.png" alt="" class="categorie_icon_title mr-2">People &amp; Skills</h4>
     <hr>
     <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="card  border-0 shadow-light mb-4">
+                <div class="card-body position-relative">
+                    <div class="row">
+                        <div class="col">
+                            <a href="{{ route('user.peopleAndSkills.addTraining') }}" class="optional-link" data-type="manager">
+                                <h6 class="mb-1">Add Training</h6>
+                                <p class="small text-mute">Click for details</p>
+                            </a>
+                        </div>
+                        <div class="col-auto">
+                            <img src="{{url('/img/icons/wow/plus.png')}}" alt="plus" width="64" height="64">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="col-12 col-md-6">
             <div class="card  border-secondary shadow-light bg-warning  mb-4">
@@ -108,23 +125,6 @@ WOW APP DASHBOARD
                         </div>
                         <div class="col-auto">
                             <img src="{{url('/img/icons/wow/calendar.png')}}" alt="calendar" width="64" height="64">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-6">
-            <div class="card  border-0 shadow-light mb-4">
-                <div class="card-body position-relative">
-                    <div class="row">
-                        <div class="col">
-                            <a href="{{url('/people-and-skills/add-training')}}" class="optional-link" data-type="manager">
-                                <h6 class="mb-1">Add Training</h6>
-                                <p class="small text-mute">Click for details</p>
-                            </a>
-                        </div>
-                        <div class="col-auto">
-                            <img src="{{url('/img/icons/wow/plus.png')}}" alt="plus" width="64" height="64">
                         </div>
                     </div>
                 </div>

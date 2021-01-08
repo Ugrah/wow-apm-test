@@ -29,6 +29,9 @@
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/style-orange.css') }}" rel="stylesheet" id="style">
+    <!-- <link href="{{ asset('css/style-red.css') }}" rel="stylesheet"> -->
+    <link href="{{ asset('css/icomoon.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
 <body class="ui-rounded">

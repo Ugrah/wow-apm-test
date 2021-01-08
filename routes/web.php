@@ -18,7 +18,7 @@ use App\Http\Controllers\User\UserController;
 |
 */
 
-Route::get('/', [UserMainController::class, 'userType'])->defaults('_config', ['view' => 'welcome', 'redirect' => 'login'])->name('user.type');
+Route::get('/', [UserMainController::class, 'userType'])->defaults('_config', ['view' => 'user.type', 'redirect' => 'login'])->name('user.type');
 Route::post('/', [UserMainController::class, 'userType'])->defaults('_config', ['view' => 'welcome', 'redirect' => 'login'])->name('user.type');
 
 // Auth::routes();
@@ -49,6 +49,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('performance-mngt/equipment-perf', [UserMainController::class, 'equipmentPerf'])->defaults('_config', ['view' => 'user.performanceMngt.equipmentPerf'])->name('user.performanceMngt.equipmentPerf');
     Route::get('performance-mngt/technical-perf', [UserMainController::class, 'technicalPerf'])->defaults('_config', ['view' => 'user.performanceMngt.technicalPerf'])->name('user.performanceMngt.technicalPerf');
 
+    // Process design management
+    Route::get('process-design-mngt', [UserMainController::class, 'processDesignMngt'])->defaults('_config', ['view' => 'user.processDesignMngt.index'])->name('user.processDesignMngt.index');
+    Route::get('process-design-mngt/mavim', [UserMainController::class, 'mavim'])->defaults('_config', ['view' => 'user.processDesignMngt.mavim'])->name('user.processDesignMngt.mavim');
+    Route::get('process-design-mngt/confluence', [UserMainController::class, 'confluence'])->defaults('_config', ['view' => 'user.processDesignMngt.confluence'])->name('user.processDesignMngt.confluence');
+
     // People and skills
     Route::get('people-and-skills', [UserMainController::class, 'peopleAndSkills'])->defaults('_config', ['view' => 'user.peopleAndSkills.index'])->name('user.peopleAndSkills.index');
     Route::get('people-and-skills/register-for-training', [UserMainController::class, 'registerForTraining'])->defaults('_config', ['view' => 'user.peopleAndSkills.registerForTraining'])->name('user.peopleAndSkills.registerForTraining');
@@ -59,11 +64,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('people-and-skills/add-training', [UserMainController::class, 'addTraining'])->defaults('_config', ['view' => 'user.peopleAndSkills.addTraining'])->name('user.peopleAndSkills.addTraining');
     Route::get('people-and-skills/training-progress', [UserMainController::class, 'trainingProgress'])->defaults('_config', ['view' => 'user.peopleAndSkills.trainingProgress'])->name('user.peopleAndSkills.trainingProgress');
 
-    // Process design management
-    Route::get('process-design-mngt/mavim', [UserMainController::class, 'mavim'])->defaults('_config', ['view' => 'user.processDesignMngt.mavim'])->name('user.processDesignMngt.mavim');
-
-
-    // Route::get('test', [UserMainController::class, 'test'])->defaults('_config', ['view' => 'user.test'])->name('user.test');
+    // Improvement mngt
+    Route::get('improvement-mngt', [UserMainController::class, 'improvementMngt'])->defaults('_config', ['view' => 'user.improvementMngt.index'])->name('user.improvementMngt.index');
 
 });
 

@@ -1,27 +1,19 @@
 @extends('layouts.user')
 
-@section('title')
-    @parent
-    WOW APP DASHBOARD
-@endsection
+@section('title') {{ config('app.name') }} - DASHBOARD @endsection
 
 @section('content')
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="cart" role="tabpanel" aria-labelledby="cart-tab">
 
-
-
         <div class="container mt-2 btn-group-vertical">
             <div class="row">
-                <!-- if (in_array($user_type, ['trainer', 'trainee', 'manager', 'employee'])) -->
                 <div class="col-12 col-md-6">
                     <div class="card  border-0 shadow-light mb-4">
                         <div class="card-body position-relative">
-
                             <div class="row">
-
                                 <div class="col">
-                                    <a href="https://apm-wow.maxmind.ma/linkV2/_sw/">
+                                    <a href="{{ route('user.standardWork.index') }}">
                                         <h6 class="mb-1">Standard Work</h6>
                                         <p class="small text-mute mb-0">Safety walk</p>
                                         <p class="small text-mute mb-0">Touch point</p>
@@ -44,7 +36,7 @@
 
                             <div class="row">
                                 <div class="col">
-                                    <a href="https://apm-wow.maxmind.ma/linkV2/_perf_m/">
+                                    <a href="{{ route('user.performanceMngt.index') }}">
                                         <h6 class="mb-1">Performance Mngt</h6>
                                         <p class="small text-mute mb-0">Terminal performance</p>
                                         <p class="small text-mute mb-0">Equipment performance</p>
@@ -66,7 +58,7 @@
 
                             <div class="row">
                                 <div class="col">
-                                    <a href="https://apm-wow.maxmind.ma/linkV2/_pdm/">
+                                    <a href="{{ route('user.processDesignMngt.index') }}">
                                         <h6 class="mb-1">Process Design Mngt</h6>
                                         <p class="small text-mute mb-0">Process</p>
                                         <p class="small text-mute mb-0">Work instructions</p>
@@ -89,7 +81,7 @@
 
                             <div class="row">
                                 <div class="col">
-                                    <a href="https://apm-wow.maxmind.ma/linkV2/_ps/">
+                                    <a href="{{ route('user.peopleAndSkills.index') }}">
                                         <h6 class="mb-1">People & Skills</h6>
                                         <p class="small text-mute mb-0">Add training</p>
                                         <p class="small text-mute mb-0">Training plan</p>
@@ -110,7 +102,7 @@
 
                             <div class="row">
                                 <div class="col">
-                                    <a href="https://apm-wow.maxmind.ma/linkV2/_imp_m/">
+                                    <a href="#">
                                         <h6 class="mb-1">Improvement Mngt</h6>
                                         <p class="small text-mute mb-0">Kaizen idea box</p>
                                         <p class="small text-mute mb-0">Initiate a Kaizen</p>
@@ -128,4 +120,26 @@
 
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    $(document).ready(function() {
+        function getMeta(metaName) {
+            const metas = document.getElementsByTagName('meta');
+            // console.log(metas);
+
+            for (let i = 0; i < metas.length; i++) {
+                if (metas[i].getAttribute('name') === metaName) {
+                    return metas[i].getAttribute('content');
+                }
+            }
+
+            return '';
+        }
+
+        const _apiTokenCookie = getMeta('api_token');
+
+    });
+</script>
 @endsection

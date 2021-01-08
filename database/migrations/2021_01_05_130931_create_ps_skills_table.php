@@ -18,7 +18,7 @@ class CreatePsSkillsTable extends Migration
 
             $table->string('skill_name');
             $table->string('url_link');
-            $table->string('logo_filename');
+            $table->string('logo_filename')->nullable();
 
             $table->bigInteger('wow_category_id')->nullable()->unsigned();
             $table->foreign('wow_category_id')

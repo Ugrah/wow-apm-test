@@ -101,10 +101,7 @@ class UserMainController extends Controller
     {
         return view($this->_config['view']);
     }
-    public function mavim()
-    {
-        return view($this->_config['view']);
-    }
+    
     public function behaviorConfirmation()
     {
         return view($this->_config['view']);
@@ -155,6 +152,46 @@ class UserMainController extends Controller
         return view($this->_config['view']);
     }
     public function trainingProgress()
+    {
+        return view($this->_config['view']);
+    }
+    
+    /** 
+     * Process Design Management - index
+     * 
+     * @return \Illuminate\Http\Response 
+     */
+    public function processDesignMngt()
+    {
+        return view($this->_config['view']);
+    }
+
+    /** 
+     * Process Design Management - mavim
+     * 
+     * @return \Illuminate\Http\Response 
+     */
+    public function mavim()
+    {
+        return view($this->_config['view']);
+    }
+
+    /** 
+     * Process Design Management  - confluence
+     * 
+     * @return \Illuminate\Http\Response 
+     */
+    public function confluence()
+    {
+        return view($this->_config['view']);
+    }
+
+    /** 
+     * Improvement mngt - index
+     * 
+     * @return \Illuminate\Http\Response 
+     */
+    public function improvementMngt()
     {
         return view($this->_config['view']);
     }
