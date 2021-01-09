@@ -36,38 +36,18 @@ Route::group(['middleware' => 'cors'], function () {
         Route::get('user', [ApiAuthController::class, 'user'])->name('api.user');
 
         // Api Users Routes
-        Route::get('users', [ApiUserController::class, 'index'])->name('api.users.index');
-        Route::get('users/{id}', [ApiUserController::class, 'show'])->name('api.users.show');
-        Route::post('users', [ApiUserController::class, 'store'])->name('api.users.store');
-        Route::put('users/{id}', [ApiUserController::class, 'update'])->name('api.users.update');
-        Route::patch('users/{id}', [ApiUserController::class, 'update'])->name('api.users.update');
-        Route::delete('users/{id}', [ApiUserController::class, 'destroy'])->name('api.users.destroy');
+        Route::resource('users', ApiUserController::class);
+        Route::get('get-members/{members_id}', [ApiUserController::class, 'getMemebers'])->name('api.terminals.all');
 
         // Api Terminals Routes
+        Route::resource('terminals', ApiTerminalController::class);
         Route::get('terminals-all', [ApiTerminalController::class, 'getAll'])->name('api.terminals.all');
-        Route::get('terminals', [ApiTerminalController::class, 'index'])->name('api.terminals.index');
-        Route::get('terminals/{id}', [ApiTerminalController::class, 'show'])->name('api.terminals.show');
-        Route::post('terminals', [ApiTerminalController::class, 'store'])->name('api.terminals.store');
-        Route::put('terminals/{id}', [ApiTerminalController::class, 'update'])->name('api.terminals.update');
-        Route::patch('terminals/{id}', [ApiTerminalController::class, 'update'])->name('api.terminals.update');
-        Route::delete('terminals/{id}', [ApiTerminalController::class, 'destroy'])->name('api.terminals.destroy');
 
         // Api Roles Routes
-        Route::get('roles', [ApiRoleController::class, 'index'])->name('api.roles.index');
-        Route::get('roles/{id}', [ApiRoleController::class, 'show'])->name('api.roles.show');
-        Route::post('roles', [ApiRoleController::class, 'store'])->name('api.roles.store');
-        Route::put('roles/{id}', [ApiRoleController::class, 'update'])->name('api.roles.update');
-        Route::patch('roles/{id}', [ApiRoleController::class, 'update'])->name('api.roles.update');
-        Route::delete('roles/{id}', [ApiRoleController::class, 'destroy'])->name('api.roles.destroy');
-
+        Route::resource('roles', ApiRoleController::class);
 
         // Api Departments Routes
-        Route::get('departments', [ApiDepartmentController::class, 'index'])->name('api.departments.index');
-        Route::get('departments/{id}', [ApiDepartmentController::class, 'show'])->name('api.departments.show');
-        Route::post('departments', [ApiDepartmentController::class, 'store'])->name('api.departments.store');
-        Route::put('departments/{id}', [ApiDepartmentController::class, 'update'])->name('api.departments.update');
-        Route::patch('departments/{id}', [ApiDepartmentController::class, 'update'])->name('api.departments.update');
-        Route::delete('departments/{id}', [ApiDepartmentController::class, 'destroy'])->name('api.departments.destroy');
+        Route::resource('departments', ApiDepartmentController::class);
 
         // Api ps_skills Route
         Route::resource('ps-skills', ApiPsSkillController::class);
@@ -81,8 +61,7 @@ Route::group(['middleware' => 'cors'], function () {
         
         // Api ps_training_session Route
         Route::resource('ps-training-sessions', ApiPsTrainingSessionController::class);
-        // Route::get('add-training-session', [ApiPsTrainingSessionController::class, 'addTrainingSession'])->name('api.ps_training_sessions.addTrainingSession');
-
+        Route::get('get-ps-training-sessions-by-year/{year}', [ApiPsTrainingSessionController::class, 'getPsTrainingSessionsByYear'])->name('api.ps-training-sessions.getTrainingSessionsByYear');
 
         // Api ps_training_session_user Route
         Route::resource('ps-training-session-users', ApiPsTrainingSessionUserController::class);

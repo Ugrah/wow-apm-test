@@ -42,6 +42,9 @@
     <link href="{{ asset('css/icomoon.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    <!-- Calendar css -->
+    <link href="{{ asset('css/calendar.css') }}" rel="stylesheet">
+
     <style>
         .svg__admin {
             width: 40px;

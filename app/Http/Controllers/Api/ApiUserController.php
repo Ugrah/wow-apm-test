@@ -46,6 +46,28 @@ class ApiUserController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getMemebers($members_id)
+    {
+        if($members_id) $members_id = explode('_', $members_id);
+        $users = [];
+        foreach($members_id as $id) {
+            $user = User::find($id);
+            if($user) $users[] = $user;
+        }
+
+        $result = [
+            'data' => $users,
+            'total' => $users ? count($users) : 0,
+        ];
+
+        return response()->json($result, $users ? $this->success_status : $this->no_data_available_status);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
