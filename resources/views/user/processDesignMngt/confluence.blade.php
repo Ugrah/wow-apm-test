@@ -2,7 +2,6 @@
 
 @section('title') {{ config('app.name') }} - Process Design Managemnt @endsection
 
-
 @section('content')
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="cart" role="tabpanel" aria-labelledby="cart-tab">

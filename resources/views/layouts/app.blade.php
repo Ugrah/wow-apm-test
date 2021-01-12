@@ -9,7 +9,7 @@
     <meta name="author" content="Maxmind">
     <meta name="api_token" content="{{ $_COOKIE['api_token']??'' }}">
 
-    <title>{{ config('app.name') }}</title>
+    <title>@yield('title', config('app.name'))</title>
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" href="{{ asset('img/favicons/apple-touch-icon.png.html') }}" sizes="180x180">

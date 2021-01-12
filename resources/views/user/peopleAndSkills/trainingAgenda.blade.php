@@ -2,7 +2,6 @@
 
 @section('title') {{ config('app.name') }} - Training Agenda @endsection
 
-
 @section('content')
 <input type="hidden" name="user_type" value="manager">
 <!-- <nav id="process-list" class="mx-4">

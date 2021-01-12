@@ -5,6 +5,8 @@
 WOW APP DASHBOARD
 @endsection
 
+@section('title') {{ config('app.name') }} - Register for Training @endsection
+
 @section('content')
 <!-- page content goes here -->
 <div class="tab-content" id="myTabContent">

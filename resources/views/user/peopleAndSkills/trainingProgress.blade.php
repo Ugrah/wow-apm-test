@@ -5,6 +5,8 @@
 WOW APP DASHBOARD
 @endsection
 
+@section('title') {{ config('app.name') }} - Training progress @endsection
+
 @section('content')
 <!-- page content goes here -->
 <div class="tab-content" id="myTabContent">

@@ -2,7 +2,6 @@
 
 @section('title') {{ config('app.name') }} - Process Design Managemnt @endsection
 
-
 @section('content')
 <!-- page content goes here -->
 <div class="container mt-2">

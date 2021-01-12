@@ -1,9 +1,6 @@
 @extends('layouts.user')
 
-@section('title')
-@parent
-WOW APP DASHBOARD
-@endsection
+@section('title') {{ config('app.name') }} - Technical Performance @endsection
 
 @section('content')
 <!-- page content goes here -->

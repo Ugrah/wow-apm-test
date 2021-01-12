@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="Maxmind">
 
-    <title>{{ config('app.name') }}</title>
+    <title>{{ config('app.name') }} - Login</title>
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" href="{{ asset('img/favicons/apple-touch-icon.png.html') }}" sizes="180x180">

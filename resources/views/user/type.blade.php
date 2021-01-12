@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('title') {{ config('app.name') }} - User Type @endsection
 
 @section('content')
 <style>

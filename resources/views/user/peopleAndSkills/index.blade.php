@@ -5,6 +5,9 @@
 WOW APP DASHBOARD
 @endsection
 
+@section('title') {{ config('app.name') }} - People &amp; Skill @endsection
+
+
 @section('content')
 <!-- page content goes here -->
 

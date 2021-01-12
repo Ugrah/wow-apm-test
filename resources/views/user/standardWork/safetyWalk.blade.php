@@ -5,6 +5,8 @@
 WOW APP DASHBOARD
 @endsection
 
+@section('title') {{ config('app.name') }} - Safety Walk @endsection
+
 @section('content')
 <!-- page content goes here -->
 <div class="container mt-2">

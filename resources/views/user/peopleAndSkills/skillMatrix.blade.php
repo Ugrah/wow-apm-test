@@ -1,9 +1,6 @@
 @extends('layouts.user')
 
-@section('title')
-@parent
-WOW APP DASHBOARD
-@endsection
+@section('title') {{ config('app.name') }} - Skill Matrix @endsection
 
 @section('content')
     <nav id="process-list" class="mx-4">

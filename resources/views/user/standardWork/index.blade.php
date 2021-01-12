@@ -1,9 +1,6 @@
 @extends('layouts.user')
 
-@section('title')
-@parent
-Standard work
-@endsection
+@section('title') {{ config('app.name') }} - Standard Work @endsection
 
 @section('content')
 <!-- page content goes here -->
