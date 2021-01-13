@@ -15,7 +15,7 @@
     </div>
     <div class="row">
         <div id="button" class="col-12 col-md-6">
-        <button type="button" style="display: none;" class="btn btn-primary">Plus</button>
+            <button type="button" style="display: none;" class="btn btn-primary">Plus</button>
         </div>
     </div>
     
