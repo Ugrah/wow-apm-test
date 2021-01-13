@@ -11,28 +11,14 @@
     </h4>
     <hr>
     <div class="row">
-        <div id="responses-list" class="col-12 col-md-6">
-            <div class="card shadow-sm border-0">
-
-                <div class="card-body">
-                    <div class="media">
-                        <figure class="icons icon-40 mr-2 bg-default">
-                            <i class="material-icons">star</i>
-                        </figure>
-                        <div class="media-body">
-                            <h6 class="mb-1"><a href="https://apm-wow.maxmind.ma/v3/public/show/77">kaizen form</a></h6>
-                            <p class="mb-0 text-mute small">
-                                <span class="text-warning">23/12/2020</span>
-                                <span class="pull-right">13:28</span>
-                            </p>
-                            <div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div id="responses-list" class="col-12 col-md-6"></div>
+    </div>
+    <div class="row">
+        <div id="button" class="col-12 col-md-6">
+        <button type="button" style="display: none;" class="btn btn-primary">Plus</button>
         </div>
     </div>
+    
 
 </div>
 @endsection
@@ -68,6 +54,8 @@
          * @returns {*} $elmt 
          */
         function createFormResponse(itemData) {
+            let date = moment(itemData.created_at);
+            let title =jQuery.parseJSON(itemData.data)
             let $elmt = $(`<div class="card shadow-sm border-0 my-2">
                 <div class="card-body">
                     <div class="media">
@@ -75,11 +63,12 @@
                             <i class="material-icons">star</i>
                         </figure>
                         <div class="media-body">
-                            <h6 class="mb-1"><a href="https://apm-wow.maxmind.ma/v3/public/show/77">${itemData.id}</a></h6>
+                            <h6 class="mb-1"><a href="https://apm-wow.maxmind.ma/v3/public/show/77">${title.title}</a></h6>
                             <p class="mb-0 text-mute small">
-                                <span class="text-warning">"</span>
-                                <span class="pull-right text-default">13:28</span>
+                                <span class="text-warning">${date.format('DD-MM-YYYY')}</span>
+                                <span class="pull-right text-default">${date.format('HH:mm')}</span>
                             </p>
+                           
                             <div>
                             </div>
                         </div>
@@ -127,6 +116,8 @@
             $.when(
                 getKaizensFormResponses()
             ).then((response) => {
+                console.log(response.to)
+                
                 if ($parent.length <= 0) return;
                 else {
                     // console.log(response);
@@ -140,10 +131,15 @@
                     } else $parent.text('No data found');
                     $parent.removeClass('justify-content-center text-center');
                 }
+                // if(response.total > response.to){
+                //     let button = $(`<button type="button" class="btn"> Primary</button> `);
+                //     $parent.append(button);
+                // } else $parent.removeClass('btn');
             });
         }
 
         initResponse($('#responses-list'));
     });
 </script>
+
 @endsection
