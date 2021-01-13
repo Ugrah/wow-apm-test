@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TerminalSeeder::class);
         $this->call(DepartmentSeeder::class);
         $this->call(CreateAdminUserSeeder::class);
+        $this->call(JsonFormSeeder::class);
     }
 }

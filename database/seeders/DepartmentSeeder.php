@@ -16,9 +16,12 @@ class DepartmentSeeder extends Seeder
     public function run()
     {
         $departments = [
-            ['name' => 'HSSE', 'description' => 'HSSE department', 'color_code' => '#fff'],
-            ['name' => 'Finance', 'description' => 'Financial department', 'color_code' => '#fff'],
-            ['name' => 'IT', 'description' => 'IT description', 'color_code' => '#fff'],
+            ['name' => 'HSSE', 'description' => 'HSSE department', 'color_code' => '#28A899'],
+            ['name' => 'Finance', 'description' => 'Financial department', 'color_code' => '#26A4F2'],
+            ['name' => 'IT', 'description' => 'IT description', 'color_code' => '#30497C'],
+            ['name' => 'Proc', 'description' => 'Proc description', 'color_code' => '#335DE7'],
+            ['name' => 'Lean Academy', 'description' => 'Lean Academy description', 'color_code' => '#F91262'],
+            ['name' => 'HR', 'description' => 'Human resources', 'color_code' => '#384AD7'],
         ];
 
         DB::table('departments')->delete();

@@ -42,12 +42,10 @@ class CreateUsersTable extends Migration
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
 
-            $table->bigInteger('manager_id')->nullable()->unsigned();
-            $table->foreign('manager_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');
+            $table->string('manager_id')->nullable();
+            // $table->foreign('manager_id')
+            //     ->references('unique_id')
+            //     ->on('users');
 
             $table->bigInteger('terminal_id')->nullable()->unsigned();
             $table->foreign('terminal_id')

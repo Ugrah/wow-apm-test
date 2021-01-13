@@ -20,20 +20,25 @@ class CreateAdminUserSeeder extends Seeder
         DB::table('users')->delete();
 
         $user = User::create([
-            'firstname' => 'User', 
-            'lastname' => 'Admin', 
-            'username' => 'ADMIN', 
-            'unique_id' => 'ADMIN', 
+            'firstname' => 'User',
+            'lastname' => 'Admin',
+            'username' => 'ADMIN',
+            'unique_id' => 'ADMIN',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('123456')
         ]);
-    
-        $role = Role::create(['name' => 'admin', 'description' => 'Admin role']);
-     
-        $permissions = Permission::pluck('id','id')->all();
-   
+
+        $super_admin_role = Role::create(['name' => 'SUPER_ADMIN', 'description' => 'Super Admin Role']);
+        $role = Role::create(['name' => 'ADMIN', 'description' => 'Admin role']);
+
+        $permissions = Permission::pluck('id', 'id')->all();
+
+        $super_admin_role->syncPermissions($permissions);
         $role->syncPermissions($permissions);
-     
-        $user->assignRole([$role->id]);
+
+        $user->assignRole([
+            $super_admin_role->id,
+            $role->id
+        ]);
     }
 }

@@ -21,7 +21,7 @@ class ApiPsTrainingSessionController extends Controller
      */
     function __construct()
     {
-        $this->middleware(['role:admin'], ['except' => []]);
+        // $this->middleware(['role:ADMIN'], ['except' => []]);
     }
     /**
      * Display a listing of the resource.

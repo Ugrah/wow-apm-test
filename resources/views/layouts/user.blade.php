@@ -339,7 +339,7 @@
             <div class="col-auto align-self-center">
                 <figure class="avatar avatar-50">
                     <a href="#">
-                        <img src="{{ asset('img/avatar_.png') }}" alt="Sidebar  avatr profile">
+                        <img src="{{ asset('img/avatar_.png') }}" alt="Sidebar avatar profile">
 
                     </a>
                 </figure>

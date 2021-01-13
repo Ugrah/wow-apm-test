@@ -25,7 +25,7 @@ class ApiUserController extends Controller
      */
     function __construct()
     {
-        $this->middleware(['role:admin'], ['except' => []]);
+        // $this->middleware(['role:ADMIN'], ['except' => []]);
 
         // $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index', 'store']]);
         // // $this->middleware('role:role-create', ['only' => ['create', 'store']]);

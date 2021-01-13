@@ -25,7 +25,7 @@ class ApiJsonFormResponseController extends Controller
      */
     function __construct()
     {
-        $this->middleware(['role:admin'], ['except' => []]);
+        // $this->middleware(['role:ADMIN'], ['except' => []]);
     }
 
     /**

@@ -24,7 +24,7 @@ class ApiTerminalController extends Controller
      */
     function __construct()
     {
-        $this->middleware(['role:admin'], ['except' => ['getAll']]);
+        // $this->middleware(['role:ADMIN'], ['except' => ['getAll']]);
     }
 
     /**
