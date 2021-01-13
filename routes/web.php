@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminMainController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\User\UserMainController;
@@ -69,6 +70,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('improvement-mngt', [UserMainController::class, 'improvementMngt'])->defaults('_config', ['view' => 'user.improvementMngt.index'])->name('user.improvementMngt.index');
     Route::get('improvement-mngt/kaizen', [UserMainController::class, 'kaizen'])->defaults('_config', ['view' => 'user.improvementMngt.kaizen'])->name('user.improvementMngt.kaizen');
     Route::get('improvement-mngt/my-kaizens', [UserMainController::class, 'myKaizens'])->defaults('_config', ['view' => 'user.improvementMngt.myKaizens'])->name('user.improvementMngt.myKaizens');
+
+
+    // ADMIN
+    Route::get('admin', [AdminMainController::class, 'dashboard'])->defaults('_config', ['view' => 'admin.dashboard'])->name('admin.dashboard');
 
 });
 

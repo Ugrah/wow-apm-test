@@ -11,6 +11,9 @@
 
     <title>@yield('title', config('app.name'))</title>
 
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+
     <!-- Favicons -->
     <link rel="apple-touch-icon" href="{{ asset('img/favicons/apple-touch-icon.png.html') }}" sizes="180x180">
     <!-- <link rel="icon" href="{{ asset('img/favicons/favicon-32x32.png') }}" sizes="32x32" type="image/png"> -->

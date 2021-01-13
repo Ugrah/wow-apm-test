@@ -345,7 +345,7 @@
                 </figure>
             </div>
             <div class="col pl-3 align-self-center">
-                <p class="my-0">User Name</p>
+                <p class="my-0">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</p>
                 <p class="text-mute my-0 small">APM TERMINALS</p>
                 <small class="text-mute">Tangier</small>
 

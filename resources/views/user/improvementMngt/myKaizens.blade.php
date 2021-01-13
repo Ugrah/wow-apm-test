@@ -18,8 +18,6 @@
             <button type="button" style="display: none;" class="btn btn-primary">Plus</button>
         </div>
     </div>
-    
-
 </div>
 @endsection
 
