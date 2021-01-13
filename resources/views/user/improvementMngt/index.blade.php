@@ -18,7 +18,7 @@
 
                             <div class="row">
                                 <div class="col">
-                                    <a href="https://apm-wow.maxmind.ma/linkV2/kaizen.php">
+                                    <a href="{{ route('user.improvementMngt.kaizen') }}">
                                         <h6 class="mb-1">Initiate a Kaizen</h6>
                                         <p class="small text-mute">Click to fill the form</p>
                                     </a>
@@ -36,7 +36,7 @@
 
                             <div class="row">
                                 <div class="col">
-                                    <a href="https://apm-wow.maxmind.ma/linkV2/kaizen_all.php">
+                                    <a href="{{ route('user.improvementMngt.myKaizens') }}">
                                         <h6 class="mb-1">My Kaizens</h6>
                                         <p class="small text-mute">Click to display all kaizens</p>
                                     </a>

@@ -88,6 +88,7 @@ class UserMainController extends Controller
         return view($this->_config['view']);
     }
 
+    // Standard Work Pages
     public function standardWork()
     {
         return view($this->_config['view']);
@@ -106,6 +107,13 @@ class UserMainController extends Controller
     {
         return view($this->_config['view']);
     }
+
+    public function leaderLed()
+    {
+        return view($this->_config['view']);
+    }
+    // End Standard Work Pages
+
     public function performanceMngt()
     {
         return view($this->_config['view']);
@@ -192,6 +200,14 @@ class UserMainController extends Controller
      * @return \Illuminate\Http\Response 
      */
     public function improvementMngt()
+    {
+        return view($this->_config['view']);
+    }
+    public function kaizen()
+    {
+        return view($this->_config['view']);
+    }
+    public function myKaizens()
     {
         return view($this->_config['view']);
     }

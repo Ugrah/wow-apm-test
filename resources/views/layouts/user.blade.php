@@ -36,6 +36,8 @@
     <!-- Jquery UI css -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css" integrity="sha512-wJgJNTBBkLit7ymC6vvzM1EcSWeM9mmOu+1USHaRBbHkm6W9EgM0HY27+UtUaprntaYQJF75rc8gjxllKs5OIQ==" crossorigin="anonymous" />
+
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/level.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style-red.css') }}" rel="stylesheet">
@@ -381,7 +383,7 @@
             <div class="toast-header">
                 <div class="avatar avatar-20 mr-2">
                     <div class="background">
-                        <img src="https://apm-wow.maxmind.ma/linkV2/assets/img/workLogo.svg" class="mr-2" alt="...">
+                        <img src="{{ asset('img/workLogo.svg') }}" class="mr-2" alt="...">
                     </div>
                 </div>
                 <strong class="mr-auto">APM Tangier</strong>
@@ -459,6 +461,8 @@
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap-4.4.1/js/bootstrap.min.js') }}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js" integrity="sha512-zlWWyZq71UMApAjih4WkaRpikgY9Bz1oXIW5G0fED4vk14JjGlQ1UmkGM392jEULP8jbNMiwLWdM8Z87Hu88Fw==" crossorigin="anonymous"></script>
 
     <script type="text/javascript">
         $.fn.bsModal = $.fn.modal.noConflict();

@@ -102,7 +102,7 @@
 
                             <div class="row">
                                 <div class="col">
-                                    <a href="#">
+                                    <a href="{{ route('user.improvementMngt.index') }}">
                                         <h6 class="mb-1">Improvement Mngt</h6>
                                         <p class="small text-mute mb-0">Kaizen idea box</p>
                                         <p class="small text-mute mb-0">Initiate a Kaizen</p>

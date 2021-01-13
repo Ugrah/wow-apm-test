@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth']], function () {
     // Standard work
     Route::get('standard-work', [UserMainController::class, 'standardWork'])->defaults('_config', ['view' => 'user.standardWork.index'])->name('user.standardWork.index');
     Route::get('standard-work/safety-walk', [UserMainController::class, 'safetyWalk'])->defaults('_config', ['view' => 'user.standardWork.safetyWalk'])->name('user.standardWork.safetyWalk');
+    Route::get('standard-work/safety-walk/leader-led', [UserMainController::class, 'leaderLed'])->defaults('_config', ['view' => 'user.standardWork.leaderLed'])->name('user.standardWork.safetyWalk.leaderLed');
     Route::get('standard-work/touch-point', [UserMainController::class, 'touchPoint'])->defaults('_config', ['view' => 'user.standardWork.touchPoint'])->name('user.standardWork.touchPoint');
     Route::get('standard-work/behavior-confirmation', [UserMainController::class, 'behaviorConfirmation'])->defaults('_config', ['view' => 'user.standardWork.behaviorConfirmation'])->name('user.standardWork.behaviorConfirmation');
 
@@ -66,6 +67,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Improvement mngt
     Route::get('improvement-mngt', [UserMainController::class, 'improvementMngt'])->defaults('_config', ['view' => 'user.improvementMngt.index'])->name('user.improvementMngt.index');
+    Route::get('improvement-mngt/kaizen', [UserMainController::class, 'kaizen'])->defaults('_config', ['view' => 'user.improvementMngt.kaizen'])->name('user.improvementMngt.kaizen');
+    Route::get('improvement-mngt/my-kaizens', [UserMainController::class, 'myKaizens'])->defaults('_config', ['view' => 'user.improvementMngt.myKaizens'])->name('user.improvementMngt.myKaizens');
 
 });
 

@@ -67,7 +67,7 @@
                         <a class="icons icon-60 " href="{{ route('user.standardWork.safetyWalk') }}">
                             <img src="{{ asset('img/icons/wow/safety-walk-free.jpg') }}" alt="" class="categorie_icon_title">
                         </a>
-                        <p class="small mt-2 text-mute">Safety <br>Walk</p>
+                        <p class="small mt-2 text-default">Safety <br>Walk</p>
                     </div>
                     <div class="swiper-slide w-auto p-2 swiper-slide-next">
                         <a class="icons icon-60" href="{{ route('user.standardWork.touchPoint') }}">
@@ -81,7 +81,7 @@
                                 <path class="st0" d="M17.7,9.1h-3.5c-1,0-1.7,0.8-1.7,1.7v4.3c0,1,0.8,1.7,1.7,1.7h3.5c1,0,1.7-0.8,1.7-1.7v-4.3 C19.5,9.8,18.7,9.1,17.7,9.1z M17.7,15.1h-3.5v-4.3h3.5V15.1z"></path>
                             </svg>
                         </a>
-                        <p class="small mt-2 text-mute">Touch <br>Point</p>
+                        <p class="small mt-2 text-default">Touch <br>Point</p>
                     </div>
                     <div class="swiper-slide w-auto p-2">
                         <!-- <a  class="icons icon-60 "> -->
@@ -98,7 +98,7 @@
                                 </g>
                             </svg>
                         </a>
-                        <p class="small mt-2 text-mute">Process<br>Confirmation</p>
+                        <p class="small mt-2 text-default">Process<br>Confirmation</p>
                     </div>
                     <div class="swiper-slide w-auto p-2">
                         <a class="icons icon-60 " href="{{ route('user.standardWork.behaviorConfirmation') }}">
@@ -115,7 +115,7 @@
                         c-2.2,0-4.1-1.8-4.1-4.1s1.8-4.1,4.1-4.1s4.1,1.8,4.1,4.1C20.1,18.2,18.2,20.1,16,20.1z"></path>
                             </svg>
                         </a>
-                        <p class="small mt-2 text-mute">Behavior<br>Confirmation</p>
+                        <p class="small mt-2 text-default">Behavior<br>Confirmation</p>
                     </div>
 
                 </div>

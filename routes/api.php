@@ -9,10 +9,13 @@ use App\Http\Controllers\Api\ApiUserController;
 use App\Http\Controllers\Api\ApiTerminalController;
 use App\Http\Controllers\Api\ApiRoleController;
 use App\Http\Controllers\Api\ApiDepartmentController;
+use App\Http\Controllers\Api\ApiJsonFormController;
+use App\Http\Controllers\Api\ApiJsonFormResponseController;
 use App\Http\Controllers\Api\ApiPsSkillController;
 use App\Http\Controllers\Api\ApiWowCategoryController;
 use App\Http\Controllers\Api\ApiPsTrainingSessionController;
 use App\Http\Controllers\Api\ApiPsTrainingSessionUserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +68,15 @@ Route::group(['middleware' => 'cors'], function () {
 
         // Api ps_training_session_user Route
         Route::resource('ps-training-session-users', ApiPsTrainingSessionUserController::class);
+
+
+        // Forms 
+        Route::get('json-form/{id}', [ApiJsonFormController::class, 'show'])->name('api.json-form.show');
+
+        // FormResponses
+        Route::resource('json-form-response', ApiJsonFormResponseController::class);
+        Route::get('response-kaizens/', [ApiJsonFormResponseController::class, 'kaizenIndex'])->name('api.json-form-response.myKaizens');
+
     });
 });
 

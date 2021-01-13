@@ -668,7 +668,7 @@
                 processData: false,
             };
 
-            fetch('/api/ps_training_sessions', requestOptions)
+            fetch('/api/ps-training-sessions', requestOptions)
                 .then(response => response.text())
                 .then(response => {
                     response = JSON.parse(response);

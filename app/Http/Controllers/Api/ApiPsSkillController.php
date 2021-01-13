@@ -67,26 +67,25 @@ class ApiPsSkillController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    { {
-            $this->validate($request, [
-                'skill_name' => 'required|string|unique:departments,name',
-                'url_link' => 'required|string',
-                'wow_category_id' => 'numeric'
-                // 'logo_filename' => 'required|string',
-            ]);
+    {
+        $this->validate($request, [
+            'skill_name' => 'required|string|unique:departments,name',
+            'url_link' => 'required|string',
+            'wow_category_id' => 'numeric'
+            // 'logo_filename' => 'required|string',
+        ]);
 
-            $input = $request->all();
+        $input = $request->all();
 
-            // $input['skill_name'] = ucfirst(strtolower($input['skill_name']));
-            $input['url_link'] = strtoupper($input['url_link']);
-            $input['created_by'] = $request->user()->id;
+        // $input['skill_name'] = ucfirst(strtolower($input['skill_name']));
+        $input['url_link'] = strtoupper($input['url_link']);
+        $input['created_by'] = $request->user()->id;
 
-            $input['logo_filename'] = empty($input['logo_filename']) ? '' : '';
+        $input['logo_filename'] = empty($input['logo_filename']) ? '' : '';
 
-            $ps_skill = PsSkill::create($input);
+        $ps_skill = PsSkill::create($input);
 
-            return response()->json($ps_skill, $ps_skill ? $this->success_status : $this->bas_request);
-        }
+        return response()->json($ps_skill, $ps_skill ? $this->success_status : $this->bas_request);
     }
 
     /**
@@ -165,7 +164,9 @@ class ApiPsSkillController extends Controller
                 'ps_training_sessions.ps_skill_id',
                 'ps_training_sessions.level',
                 'ps_training_sessions.trainer_id',
-                'user_id', 'users.firstname', 'users.lastname',
+                'user_id',
+                'users.firstname',
+                'users.lastname',
             )
             ->where('ps_training_sessions.ps_skill_id', $id)
             ->where('ps_training_sessions.level', '>=', $expert_level)

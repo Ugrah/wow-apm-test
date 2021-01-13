@@ -1,10 +1,5 @@
 @extends('layouts.user')
 
-@section('title')
-@parent
-WOW APP DASHBOARD
-@endsection
-
 @section('title') {{ config('app.name') }} - Safety Walk @endsection
 
 @section('content')
@@ -46,7 +41,7 @@ WOW APP DASHBOARD
                 <div class="card-body position-relative">
                     <div class="row">
                         <div class="col">
-                            <a href="./leader_led.php" class="optional-link" data-type="manager">
+                            <a href="{{ route('user.standardWork.safetyWalk.leaderLed') }}" class="optional-link" data-type="manager">
                                 <h6 class="mb-1">Leader-led HSSE</h6>
                                 <p class="small text-mute">Go to form</p>
                             </a>
